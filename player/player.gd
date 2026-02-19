@@ -11,6 +11,7 @@ extends CharacterBody2D
 
 var coins: int = 0
 var hearts: int = 3
+var atacking: bool = false
 
 func _ready() -> void:
 	add_to_group("jugadores")
@@ -23,7 +24,11 @@ func die():
 	get_tree().reload_current_scene()
 
 func updateAnimation(inputAxis):
-	if inputAxis !=0:
+	if atacking:
+		playerAni.play("atack")
+		if playerAni.animation_finished:
+			atacking = false
+	elif inputAxis !=0:
 		playerAni.speed_scale = velocity.length()/100
 		playerAni.flip_h = (inputAxis<0)
 		playerAni.play("run")
@@ -42,6 +47,10 @@ func handleJump():
 	if is_on_floor():
 		if Input.is_action_pressed("jump"):
 			velocity.y = jumpForce
+
+func handleAtack():
+	if Input.is_action_pressed("atack"):
+		atacking = true
 
 func applyFriction(inputAxis, delta):
 	if inputAxis==0 and is_on_floor():

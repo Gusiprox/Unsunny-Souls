@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bn0d8p7u5f1mo" path="res://player/img/_Attack.png" id="1_g6k8r"]
 [ext_resource type="Texture2D" uid="uid://bjchfya57jrs1" path="res://player/img/_Idle.png" id="1_oul6g"]
 [ext_resource type="Texture2D" uid="uid://cr7yy0ui4jjxw" path="res://player/img/_Death.png" id="2_boad6"]
+[ext_resource type="Texture2D" uid="uid://bbqqo5w7a3cnp" path="res://player/img/_Hit.png" id="4_hg6s5"]
 [ext_resource type="Texture2D" uid="uid://rav1rckhk4q1" path="res://player/img/_Jump.png" id="4_rgyib"]
 [ext_resource type="Texture2D" uid="uid://d0ejx1m4stpts" path="res://player/img/_JumpFallInbetween.png" id="5_hg6s5"]
 [ext_resource type="Texture2D" uid="uid://bc41vr2iy75u" path="res://player/img/_Run.png" id="6_8t03j"]
@@ -63,6 +64,10 @@ region = Rect2(960, 35, 120, 45)
 [sub_resource type="AtlasTexture" id="AtlasTexture_g4c7l"]
 atlas = ExtResource("2_boad6")
 region = Rect2(1080, 35, 120, 45)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8t03j"]
+atlas = ExtResource("4_hg6s5")
+region = Rect2(0, 35, 120, 45)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_knn7v"]
 atlas = ExtResource("1_oul6g")
@@ -220,6 +225,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_8t03j")
+}],
+"loop": true,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_knn7v")
 }, {
 "duration": 1.0,
@@ -312,14 +325,24 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yllr7"]
 size = Vector2(17, 34)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rgyib"]
+size = Vector2(36, 41)
+
 [node name="Player" type="CharacterBody2D" unique_id=1655714033]
 script = ExtResource("1_boad6")
 
 [node name="PlayerAni" type="AnimatedSprite2D" parent="." unique_id=257607245]
 sprite_frames = SubResource("SpriteFrames_ebec5")
-animation = &"idle"
-frame_progress = 0.91710985
+animation = &"atack"
+frame = 3
+frame_progress = 0.67975473
 
 [node name="PlayerCol" type="CollisionShape2D" parent="." unique_id=1968024064]
 position = Vector2(-5.5, 3)
 shape = SubResource("RectangleShape2D_yllr7")
+
+[node name="PlayerAtackAr" type="Area2D" parent="." unique_id=1094434331]
+
+[node name="PlayerAtackCol" type="CollisionShape2D" parent="PlayerAtackAr" unique_id=1087031227]
+position = Vector2(27, 0.5)
+shape = SubResource("RectangleShape2D_rgyib")
