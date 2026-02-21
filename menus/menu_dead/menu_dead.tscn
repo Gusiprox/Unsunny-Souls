@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://cjqd1obdvtga4"]
+
+[ext_resource type="Texture2D" uid="uid://cltp2lv6ie74e" path="res://menus/menu_dead/img/dead.png" id="1_14ymk"]
+[ext_resource type="Script" uid="uid://bnatwiliv8ieg" path="res://menus/menu_dead/menu_dead.gd" id="1_bn14s"]
+[ext_resource type="FontFile" uid="uid://calo67bsedgsr" path="res://menus/menu_start/font/antiquity-print.ttf" id="2_bn14s"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2koq5"]
+font = ExtResource("2_bn14s")
+font_size = 70
+font_color = Color(0.5529412, 0.14901961, 0.05882353, 1)
+outline_size = 10
+outline_color = Color(0.15686275, 0.019607844, 0.023529412, 1)
+shadow_size = 30
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(6, 7)
+
+[node name="MenuDead" type="Control" unique_id=1656222167]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bn14s")
+
+[node name="imgMenuDead" type="Sprite2D" parent="." unique_id=29571150]
+position = Vector2(577, 326.00003)
+scale = Vector2(0.6041666, 0.6092593)
+texture = ExtResource("1_14ymk")
+
+[node name="conMenuDead" type="VBoxContainer" parent="." unique_id=2084932835]
+layout_mode = 0
+offset_left = 335.0
+offset_top = 201.0
+offset_right = 822.0
+offset_bottom = 416.0
+
+[node name="lblDeath" type="Label" parent="conMenuDead" unique_id=970764540]
+layout_mode = 2
+text = "Has muerto"
+label_settings = SubResource("LabelSettings_2koq5")
+
+[node name="btnRetry" type="Button" parent="conMenuDead" unique_id=511375562]
+modulate = Color(3.5229437, 1.6784357, 1.7045296, 0.8627451)
+layout_mode = 2
+text = "Volver a intentar"
+
+[node name="btnExit" type="Button" parent="conMenuDead" unique_id=337582231]
+modulate = Color(3.5229437, 1.6784357, 1.7045296, 0.8627451)
+layout_mode = 2
+text = "Salir"
+
+[connection signal="pressed" from="conMenuDead/btnRetry" to="." method="_on_btn_reload_pressed"]
+[connection signal="pressed" from="conMenuDead/btnExit" to="." method="_on_btn_exit_pressed"]
