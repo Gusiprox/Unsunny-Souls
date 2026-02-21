@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://cj8rel1p2ep57"]
+
+[ext_resource type="Script" uid="uid://scgo0jmdiagd" path="res://menus/menu_start/menu.gd" id="1_wxlis"]
+[ext_resource type="Texture2D" uid="uid://cfbf0y6on1q4y" path="res://menus/menu_start/img/menu_start.png" id="2_poocg"]
+[ext_resource type="FontFile" uid="uid://calo67bsedgsr" path="res://menus/menu_start/font/antiquity-print.ttf" id="3_poocg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_is0kx"]
+line_spacing = 1.0
+font = ExtResource("3_poocg")
+font_size = 70
+font_color = Color(0.5514074, 0.42898706, 0.213269, 1)
+outline_size = 10
+outline_color = Color(0.24658, 0.11248871, 0.05481585, 1)
+shadow_size = 30
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(6, 7)
+
+[node name="Menu" type="Control" unique_id=432756352]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wxlis")
+
+[node name="img_menu_start" type="Sprite2D" parent="." unique_id=1440363637]
+position = Vector2(576, 324.00003)
+scale = Vector2(2.4083333, 2.4148147)
+texture = ExtResource("2_poocg")
+
+[node name="con_menu_start" type="VBoxContainer" parent="." unique_id=1575708232]
+layout_mode = 0
+offset_left = 405.0
+offset_top = 307.0
+offset_right = 744.0
+offset_bottom = 416.0
+
+[node name="btn_start" type="Button" parent="con_menu_start" unique_id=1563671365]
+layout_mode = 2
+text = "Start"
+
+[node name="btn_exit" type="Button" parent="con_menu_start" unique_id=83390422]
+layout_mode = 2
+text = "Exit"
+
+[node name="lbl_nomb_juego" type="Label" parent="." unique_id=1764377273]
+layout_mode = 0
+offset_left = 239.0
+offset_top = 176.0
+offset_right = 874.0
+offset_bottom = 280.0
+text = "Unsunny Souls"
+label_settings = SubResource("LabelSettings_is0kx")
+
+[connection signal="pressed" from="con_menu_start/btn_start" to="." method="_on_btn_start_pressed"]
+[connection signal="pressed" from="con_menu_start/btn_exit" to="." method="_on_btn_exit_pressed"]
