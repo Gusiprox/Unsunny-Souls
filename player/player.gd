@@ -8,7 +8,7 @@ extends CharacterBody2D
 @export var dashForce = 550
 @export var dashAnimationVelocity = 2
 @export var airAcceleration = 2000
-@export var atackVelocity = 2
+@export var attackVelocity = 2
 @export var iniExtraJump = 1
 @export var iniHearts = 5
 @export var iniPoints = 0
@@ -90,6 +90,7 @@ func _physics_process(delta: float) -> void:
 		states.ATACKING:
 			playerAni.play("atack")
 			handleAcceleration(inputAxis,delta, groundAcceleration)
+			decelerate()
 			if facingRight:
 				enableAtackCol(atackCol.RIGHT)
 			else:
@@ -105,6 +106,7 @@ func _physics_process(delta: float) -> void:
 		states.ATACKING_SECOND:
 			playerAni.play("atack_second")
 			handleAcceleration(inputAxis,delta, groundAcceleration)
+			decelerate()
 			if facingRight:
 				enableAtackCol(atackCol.RIGHT)
 			else:
@@ -174,9 +176,12 @@ func returnExtraJump():
 func handleAcceleration(inputAxis, delta, acceleration):
 	if inputAxis != 0:
 		if lastFacing != facingRight:
-			velocity.x = velocity.x/2
+			decelerate()
 		velocity.x = move_toward(velocity.x, speed*inputAxis, acceleration*delta)
 
+func decelerate():
+	velocity.x = velocity.x/2
+	
 func handleHorizontalView(inputAxis):
 		if inputAxis != 0:
 			lastFacing = facingRight
@@ -194,9 +199,9 @@ func handleSpeedAnimationVelocity():
 		states.RUN:
 			velocityAni = velocity.length()/100
 		states.ATACKING:
-			velocityAni = atackVelocity
+			velocityAni = attackVelocity
 		states.ATACKING_SECOND:
-			velocityAni = atackVelocity+1
+			velocityAni = attackVelocity+1
 		states.DAMAGE:
 			velocityAni = 3
 			
