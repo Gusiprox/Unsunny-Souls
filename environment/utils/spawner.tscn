@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://fywftwl4ldob"]
+
+[ext_resource type="Script" uid="uid://bbcmq4grbdg67" path="res://environment/utils/spawner.gd" id="1_cyppa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cyppa"]
+size = Vector2(89, 103)
+
+[node name="Spawner" type="Node2D" unique_id=1230627805]
+script = ExtResource("1_cyppa")
+sceneScale = 0.2
+
+[node name="SpawnerTimer" type="Timer" parent="." unique_id=986299123]
+
+[node name="SpawnerAr" type="Area2D" parent="." unique_id=530450571]
+
+[node name="SpawnerCol" type="CollisionShape2D" parent="SpawnerAr" unique_id=1065997264]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_cyppa")
+debug_color = Color(0.72019917, 0.48016948, 0, 0.41960785)
+
+[connection signal="timeout" from="SpawnerTimer" to="." method="_onSpawnerTimerTimeout"]
+[connection signal="body_entered" from="SpawnerAr" to="." method="_onSpawnerArBodyEntered"]
+[connection signal="body_exited" from="SpawnerAr" to="." method="_onSpawnerArBodyExit"]
