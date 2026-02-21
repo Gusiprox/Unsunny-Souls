@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://cstoxaq35aelo"]
+
+[ext_resource type="Texture2D" uid="uid://cbbg7duf7vfex" path="res://environment/background/img/background_layer_1.png" id="1_4ctxs"]
+[ext_resource type="Texture2D" uid="uid://ku7urwhlvlkn" path="res://environment/background/img/background_layer_2.png" id="2_tf377"]
+[ext_resource type="Texture2D" uid="uid://dknusdcxbqddc" path="res://environment/background/img/background_layer_3.png" id="3_51kwc"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" unique_id=1034196855]
+
+[node name="ParlFondo" type="ParallaxLayer" parent="." unique_id=901727319]
+motion_scale = Vector2(0.1, 1)
+motion_mirroring = Vector2(1152, 0)
+
+[node name="ImgFondo" type="Sprite2D" parent="ParlFondo" unique_id=909813486]
+scale = Vector2(3.6, 3.6)
+texture = ExtResource("1_4ctxs")
+centered = false
+
+[node name="ParlMedio" type="ParallaxLayer" parent="." unique_id=1270724215]
+motion_scale = Vector2(0.2, 1)
+motion_mirroring = Vector2(1152, 0)
+
+[node name="ImgFondo" type="Sprite2D" parent="ParlMedio" unique_id=1640561868]
+scale = Vector2(3.6, 3.6)
+texture = ExtResource("2_tf377")
+centered = false
+
+[node name="ParlPrimerPlano" type="ParallaxLayer" parent="." unique_id=357128672]
+motion_scale = Vector2(0.3, 1)
+motion_mirroring = Vector2(1152, 0)
+
+[node name="ImgFondo" type="Sprite2D" parent="ParlPrimerPlano" unique_id=1602153050]
+scale = Vector2(3.6, 3.6)
+texture = ExtResource("3_51kwc")
+centered = false
