@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://dg1xfv6oxf4g6"]
+
+[ext_resource type="Script" uid="uid://bwvy8a4ndci1n" path="res://ui.gd" id="1_g46cl"]
+[ext_resource type="Texture2D" uid="uid://c7chxxokwu5ch" path="res://player/ui/img/ui_0.png" id="2_jxrsk"]
+[ext_resource type="Texture2D" uid="uid://bm5n2cq8l3juw" path="res://player/ui/img/ui_1.png" id="3_yyjg4"]
+[ext_resource type="Texture2D" uid="uid://b8ph746l4f6de" path="res://player/ui/img/ui_2.png" id="4_ryils"]
+[ext_resource type="Texture2D" uid="uid://dtln8v3pbld0y" path="res://player/ui/img/ui_3.png" id="5_s760n"]
+[ext_resource type="Texture2D" uid="uid://cjg3621ufpqti" path="res://player/ui/img/ui_4.png" id="6_qgau6"]
+[ext_resource type="Texture2D" uid="uid://bknigp31ua20a" path="res://player/ui/img/ui_5.png" id="7_b5s21"]
+[ext_resource type="FontFile" uid="uid://cansa6iy2mnjj" path="res://common/fonts/m5x7.ttf" id="8_jxrsk"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gi3ol"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jxrsk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_yyjg4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ryils")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_s760n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_qgau6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_b5s21")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jxrsk"]
+font = ExtResource("8_jxrsk")
+font_size = 24
+font_color = Color(1, 1, 0, 1)
+
+[node name="UI" type="Control" unique_id=1593773411]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_g46cl")
+
+[node name="UIAni" type="AnimatedSprite2D" parent="." unique_id=1678081033]
+sprite_frames = SubResource("SpriteFrames_gi3ol")
+frame_progress = 0.53048146
+
+[node name="UILbl" type="Label" parent="." unique_id=1597160692]
+layout_mode = 0
+offset_left = -57.0
+offset_top = 24.0
+offset_right = -17.0
+offset_bottom = 47.0
+text = "9999"
+label_settings = SubResource("LabelSettings_jxrsk")
+horizontal_alignment = 1
+vertical_alignment = 1
