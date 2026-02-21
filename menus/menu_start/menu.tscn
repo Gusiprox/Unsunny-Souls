@@ -26,27 +26,27 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wxlis")
 
-[node name="img_menu_start" type="Sprite2D" parent="." unique_id=1440363637]
+[node name="imgMenuStart" type="Sprite2D" parent="." unique_id=1440363637]
 position = Vector2(576, 324.00003)
 scale = Vector2(2.4083333, 2.4148147)
 texture = ExtResource("2_poocg")
 
-[node name="con_menu_start" type="VBoxContainer" parent="." unique_id=1575708232]
+[node name="conMenuStart" type="VBoxContainer" parent="." unique_id=1575708232]
 layout_mode = 0
 offset_left = 405.0
 offset_top = 307.0
 offset_right = 744.0
 offset_bottom = 416.0
 
-[node name="btn_start" type="Button" parent="con_menu_start" unique_id=1563671365]
+[node name="btnStart" type="Button" parent="conMenuStart" unique_id=1563671365]
 layout_mode = 2
 text = "Start"
 
-[node name="btn_exit" type="Button" parent="con_menu_start" unique_id=83390422]
+[node name="btnExit" type="Button" parent="conMenuStart" unique_id=83390422]
 layout_mode = 2
 text = "Exit"
 
-[node name="lbl_nomb_juego" type="Label" parent="." unique_id=1764377273]
+[node name="lblNombJuego" type="Label" parent="." unique_id=1764377273]
 layout_mode = 0
 offset_left = 239.0
 offset_top = 176.0
@@ -55,5 +55,5 @@ offset_bottom = 280.0
 text = "Unsunny Souls"
 label_settings = SubResource("LabelSettings_is0kx")
 
-[connection signal="pressed" from="con_menu_start/btn_start" to="." method="_on_btn_start_pressed"]
-[connection signal="pressed" from="con_menu_start/btn_exit" to="." method="_on_btn_exit_pressed"]
+[connection signal="pressed" from="conMenuStart/btnStart" to="." method="_on_btn_start_pressed"]
+[connection signal="pressed" from="conMenuStart/btnExit" to="." method="_on_btn_exit_pressed"]
