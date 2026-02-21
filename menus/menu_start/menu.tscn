@@ -10,7 +10,7 @@ font = ExtResource("3_poocg")
 font_size = 70
 font_color = Color(0.5514074, 0.42898706, 0.213269, 1)
 outline_size = 10
-outline_color = Color(0.24658, 0.11248871, 0.05481585, 1)
+outline_color = Color(0.26133963, 0.12174023, 0.060157545, 1)
 shadow_size = 30
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(6, 7)
@@ -40,11 +40,11 @@ offset_bottom = 416.0
 
 [node name="btnStart" type="Button" parent="conMenuStart" unique_id=1563671365]
 layout_mode = 2
-text = "Start"
+text = "Jugar"
 
 [node name="btnExit" type="Button" parent="conMenuStart" unique_id=83390422]
 layout_mode = 2
-text = "Exit"
+text = "Salir"
 
 [node name="lblNombJuego" type="Label" parent="." unique_id=1764377273]
 layout_mode = 0
