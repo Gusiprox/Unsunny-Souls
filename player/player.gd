@@ -5,6 +5,8 @@ extends CharacterBody2D
 @export var groundAcceleration = 800
 @export var friction = 1500
 @export var jumpForce = -700
+@export var dashForce = 550
+@export var dashAnimationVelocity = 2
 @export var airAcceleration = 2000
 @export var atackVelocity = 2
 @export var iniExtraJump = 1
@@ -21,7 +23,9 @@ enum states{
 	RUN,
 	FALLING,
 	ATACKING,
-	DAMAGE
+	DAMAGE,
+	DASH,
+	ATACKING_SECOND
 }
 
 enum atackCol{
@@ -56,7 +60,8 @@ func _physics_process(delta: float) -> void:
 			if Input.is_action_just_pressed("atack"):
 				actualState = states.ATACKING
 			handleJump()
-			
+			if Input.is_action_just_pressed("dash"):
+				actualState = states.DASH
 		states.RUN:
 			playerAni.play("run")
 			handleAcceleration(inputAxis, delta, groundAcceleration)
@@ -68,6 +73,8 @@ func _physics_process(delta: float) -> void:
 			if Input.is_action_just_pressed("atack"):
 				actualState = states.ATACKING
 			handleJump()
+			if Input.is_action_just_pressed("dash"):
+				actualState = states.DASH
 			
 		states.FALLING:
 			handleAcceleration(inputAxis, delta, airAcceleration)
@@ -91,6 +98,20 @@ func _physics_process(delta: float) -> void:
 			if playerAni.frame == 3:
 				actualState = states.IDLE
 				disableAtackCol()
+				
+			if (playerAni.frame == 2 or playerAni.frame == 3) and Input.is_action_just_pressed("atack"):
+				actualState = states.ATACKING_SECOND
+				disableAtackCol()
+		states.ATACKING_SECOND:
+			playerAni.play("atack_second")
+			handleAcceleration(inputAxis,delta, groundAcceleration)
+			if facingRight:
+				enableAtackCol(atackCol.RIGHT)
+			else:
+				enableAtackCol(atackCol.LEFT)
+			if playerAni.frame == 5:
+				actualState = states.IDLE
+				disableAtackCol()
 		
 		states.DAMAGE:
 			playerAni.play("hit")
@@ -98,7 +119,15 @@ func _physics_process(delta: float) -> void:
 			if $PlayerDamagePityTimer.is_stopped():
 				actualState = states.IDLE
 				invulnerability = false
-				
+		
+		states.DASH:
+			playerAni.play("dash")
+			if facingRight:
+				velocity.x = dashForce * -1
+			else:
+				velocity.x = dashForce 
+			if playerAni.frame == 11:
+				actualState = states.IDLE
 
 	handleSpeedAnimationVelocity()
 	applyFriction(inputAxis, delta)
@@ -119,11 +148,12 @@ func _dealDamage():
 
 func _addPoints(amount: int):
 	points+=amount
+	ui._setPoints(points)
 
-#Cuando entra un enemigo al ara de ataque
+#Cuando entra un enemigo al area de ataque
 func _onEnterDamageArea(body: Node2D):
 	if body.is_in_group("enemies"):
-		body.dealDamage()
+		body._dealDamage()
 		_addPoints(3)
 
 func die():
@@ -165,6 +195,13 @@ func handleSpeedAnimationVelocity():
 			velocityAni = velocity.length()/100
 		states.ATACKING:
 			velocityAni = atackVelocity
+		states.ATACKING_SECOND:
+			velocityAni = atackVelocity+1
+		states.DAMAGE:
+			velocityAni = 3
+			
+		states.DASH:
+			velocityAni = dashAnimationVelocity
 	playerAni.speed_scale = velocityAni
 
 func handleJump():
