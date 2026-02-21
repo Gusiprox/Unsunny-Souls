@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://rav1rckhk4q1" path="res://player/img/_Jump.png" id="4_rgyib"]
 [ext_resource type="Texture2D" uid="uid://d0ejx1m4stpts" path="res://player/img/_JumpFallInbetween.png" id="5_hg6s5"]
 [ext_resource type="Texture2D" uid="uid://bc41vr2iy75u" path="res://player/img/_Run.png" id="6_8t03j"]
+[ext_resource type="PackedScene" uid="uid://dg1xfv6oxf4g6" path="res://player/ui/ui.tscn" id="9_hg6s5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ieo8"]
 atlas = ExtResource("1_g6k8r")
@@ -346,3 +347,10 @@ shape = SubResource("RectangleShape2D_yllr7")
 [node name="PlayerAtackCol" type="CollisionShape2D" parent="PlayerAtackAr" unique_id=1087031227]
 position = Vector2(27, 0.5)
 shape = SubResource("RectangleShape2D_rgyib")
+
+[node name="PlayerCamera" type="Camera2D" parent="." unique_id=1574912564]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=442917148]
+
+[node name="UI" parent="CanvasLayer" unique_id=377176250 instance=ExtResource("9_hg6s5")]
+position = Vector2(485, -236)
