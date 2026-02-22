@@ -40,6 +40,7 @@ var actualState: states = states.IDLE
 var facingRight: bool = true
 var lastFacing: bool = facingRight
 var invulnerability: bool = false
+var safeZone: Vector2 = position
 
 func _ready() -> void:
 	add_to_group("player")
@@ -55,6 +56,9 @@ func _physics_process(delta: float) -> void:
 
 		states.IDLE:
 			playerAni.play("idle")
+			
+			if is_on_floor():
+				safeZone = position
 			if inputAxis != 0:
 				actualState = states.RUN
 			if Input.is_action_just_pressed("atack"):
@@ -67,7 +71,8 @@ func _physics_process(delta: float) -> void:
 			handleAcceleration(inputAxis, delta, groundAcceleration)
 			
 			handleHorizontalView(inputAxis)
-			
+			if is_on_floor():
+				safeZone = position
 			if inputAxis == 0:
 				actualState = states.IDLE
 			if Input.is_action_just_pressed("atack"):
@@ -124,10 +129,18 @@ func _physics_process(delta: float) -> void:
 		
 		states.DASH:
 			playerAni.play("dash")
+			
 			if facingRight:
 				velocity.x = dashForce * -1
 			else:
-				velocity.x = dashForce 
+				velocity.x = dashForce
+			
+			if playerAni.frame >= 9:
+				invulnerability = false
+				handlePhantomMode(true)
+			else:
+				invulnerability = true
+				handlePhantomMode(false)
 			if playerAni.frame == 11:
 				actualState = states.IDLE
 
@@ -140,13 +153,14 @@ func _physics_process(delta: float) -> void:
 func _dealDamage():
 	if invulnerability: 
 		return
+	hitProcess()
 
-	delHeart()
-	playerAni.play("hit")
-	$PlayerDamagePityTimer.start()
-	actualState = states.DAMAGE
-	if hearts == 0:
-		die()
+func _dealSpikeDamage():
+	if invulnerability: 
+		return
+	position = safeZone
+	velocity = Vector2(0,0)
+	hitProcess()
 
 func _addPoints(amount: int):
 	points+=amount
@@ -157,6 +171,16 @@ func _onEnterDamageArea(body: Node2D):
 	if body.is_in_group("enemies"):
 		var damage = await body._dealDamage()
 		_addPoints(damage)
+
+	
+
+func hitProcess():
+	delHeart()
+	playerAni.play("hit")
+	$PlayerDamagePityTimer.start()
+	actualState = states.DAMAGE
+	if hearts == 0:
+		die()
 
 func die():
 	set_physics_process(false)
@@ -245,3 +269,11 @@ func enableAtackCol(col: atackCol):
 func disableAtackCol():
 		atackColRi.disabled = true
 		atackColLe.disabled = true
+
+func handlePhantomMode(active: bool):
+	if active:
+		collision_mask &= ~2 #Quitamos la mascara 1
+		collision_layer &= ~2
+	else:
+		collision_mask |= 2 #Ponemos la mascara
+		collision_layer |= 2
