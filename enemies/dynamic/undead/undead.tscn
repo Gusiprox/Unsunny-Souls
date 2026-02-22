@@ -301,6 +301,9 @@ target_position = Vector2(0, 45)
 position = Vector2(43, 14)
 target_position = Vector2(0, 45)
 
+[node name="TimerReactivateSearch" type="Timer" parent="." unique_id=2129723040]
+wait_time = 0.1
+
 [connection signal="body_entered" from="UndeadArAtk" to="." method="_on_undead_ar_atk_body_entered"]
 [connection signal="body_entered" from="UndeadArAtk" to="." method="_on_undead_ar_body_entered"]
 [connection signal="body_entered" from="UndeadArSearchLeft" to="." method="_on_undead_ar_search_left_body_entered"]
