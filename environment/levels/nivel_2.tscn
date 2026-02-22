@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dd7x5ghibet2n" path="res://enemies/dynamic/undead/undead.tscn" id="6_8koin"]
 [ext_resource type="PackedScene" uid="uid://b8slb5pgvfm8x" path="res://enemies/dynamic/ghost/ghost.tscn" id="7_amrqy"]
 [ext_resource type="PackedScene" uid="uid://byblu1bdh872d" path="res://powerups/heart/heart.tscn" id="8_na6p1"]
-[ext_resource type="AudioStream" uid="uid://c3nyovix47gdx" path="res://common/music/emmraan-medieval-adventure-270566.mp3" id="9_044io"]
+[ext_resource type="AudioStream" uid="uid://c3nyovix47gdx" path="res://common/music/nivelBosque.mp3" id="9_044io"]
 
 [node name="Nivel2" type="Node2D" unique_id=839680383]
 
@@ -89,7 +89,7 @@ spawnSceneRel = ExtResource("7_amrqy")
 stream = ExtResource("9_044io")
 volume_db = -14.08
 autoplay = true
-parameters/looping = false
+parameters/looping = true
 
 [node name="Enemies" type="Node2D" parent="." unique_id=538536032]
 
