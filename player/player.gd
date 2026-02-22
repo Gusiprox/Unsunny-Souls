@@ -155,16 +155,15 @@ func _addPoints(amount: int):
 #Cuando entra un enemigo al area de ataque
 func _onEnterDamageArea(body: Node2D):
 	if body.is_in_group("enemies"):
-		
-		_addPoints(body._dealDamage())
+		var damage = await body._dealDamage()
+		_addPoints(damage)
 
 func die():
 	set_physics_process(false)
 	playerAni.play("death")
 	$PlayerDeathTimer.start()
 	await $PlayerDeathTimer.timeout
-	# TODO Falta poner que vaya a la pantalla de muerte
-	get_tree().reload_current_scene()
+	get_tree().change_scene_to_file("res://menus/menu_dead/menu_dead.tscn")
 
 func delHeart():
 	hearts-=1
