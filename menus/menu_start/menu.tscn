@@ -33,10 +33,10 @@ texture = ExtResource("2_poocg")
 
 [node name="conMenuStart" type="VBoxContainer" parent="." unique_id=1575708232]
 layout_mode = 0
-offset_left = 405.0
-offset_top = 307.0
-offset_right = 744.0
-offset_bottom = 416.0
+offset_left = 402.0
+offset_top = 270.0
+offset_right = 741.0
+offset_bottom = 343.0
 
 [node name="btnStart" type="Button" parent="conMenuStart" unique_id=1563671365]
 layout_mode = 2
@@ -48,12 +48,53 @@ text = "Salir"
 
 [node name="lblNombJuego" type="Label" parent="." unique_id=1764377273]
 layout_mode = 0
-offset_left = 239.0
-offset_top = 176.0
-offset_right = 874.0
-offset_bottom = 280.0
+offset_left = 262.0
+offset_top = 130.0
+offset_right = 897.0
+offset_bottom = 234.0
 text = "Unsunny Souls"
 label_settings = SubResource("LabelSettings_is0kx")
 
+[node name="panelNiveles" type="Panel" parent="." unique_id=846209621]
+layout_mode = 0
+offset_left = 369.0
+offset_top = 360.0
+offset_right = 776.0
+offset_bottom = 606.0
+metadata/_edit_group_ = true
+
+[node name="scrollNiveles" type="ScrollContainer" parent="panelNiveles" unique_id=752409264]
+layout_mode = 0
+offset_left = 91.0
+offset_top = 24.0
+offset_right = 320.0
+offset_bottom = 115.0
+
+[node name="centerNiveles" type="CenterContainer" parent="panelNiveles/scrollNiveles" unique_id=868072453]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="conNiveles" type="VBoxContainer" parent="panelNiveles/scrollNiveles/centerNiveles" unique_id=1957470157]
+layout_mode = 2
+alignment = 1
+
+[node name="btnRandom" type="Button" parent="panelNiveles" unique_id=804882954]
+layout_mode = 0
+offset_left = 147.0
+offset_top = 133.0
+offset_right = 268.0
+offset_bottom = 177.0
+text = "Nivel aleatorio"
+
+[node name="btnReturn" type="Button" parent="panelNiveles" unique_id=381846608]
+layout_mode = 0
+offset_left = 112.0
+offset_top = 186.0
+offset_right = 308.0
+offset_bottom = 217.0
+text = "Cerrar menú"
+
 [connection signal="pressed" from="conMenuStart/btnStart" to="." method="_on_btn_start_pressed"]
 [connection signal="pressed" from="conMenuStart/btnExit" to="." method="_on_btn_exit_pressed"]
+[connection signal="pressed" from="panelNiveles/btnRandom" to="." method="_on_btn_random_pressed"]
+[connection signal="pressed" from="panelNiveles/btnReturn" to="." method="_on_btn_return_pressed"]
