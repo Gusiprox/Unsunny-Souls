@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dd7x5ghibet2n" path="res://enemies/dynamic/undead/undead.tscn" id="6_22dqu"]
 
 [node name="Nivel1" type="Node2D" unique_id=839680383]
+position = Vector2(283, 5)
 
 [node name="tiles" parent="." unique_id=467043159 instance=ExtResource("1_xh2tm")]
 position = Vector2(262, 361)
