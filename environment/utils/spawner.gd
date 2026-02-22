@@ -36,9 +36,7 @@ func getRandomNumber(minim: float, maxim: float) -> float:
 func _onSpawnerArBodyEntered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		canSpawn = false
-		print(canSpawn)
 
 func _onSpawnerArBodyExit(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		canSpawn = true
-		print(canSpawn)
