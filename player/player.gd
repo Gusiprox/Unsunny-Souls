@@ -43,6 +43,7 @@ var lastFacing: bool = facingRight
 var invulnerability: bool = false
 var safeZone: Vector2 = position
 var playingAtackSound: bool = false
+var isDeath: bool = false
 
 func _ready() -> void:
 	add_to_group("player")
@@ -132,7 +133,8 @@ func _physics_process(delta: float) -> void:
 				disableAtackCol()
 		
 		states.DAMAGE:
-			playerAni.play("hit")
+			if !isDeath:
+				playerAni.play("hit")
 			invulnerability = true
 			if $PlayerDamagePityTimer.is_stopped():
 				actualState = states.IDLE
@@ -163,7 +165,7 @@ func _physics_process(delta: float) -> void:
 	#print(actualState)
 
 func _dealDamage():
-	if invulnerability: 
+	if invulnerability or isDeath: 
 		return
 	hitProcess()
 
@@ -194,13 +196,13 @@ func playAtackSound(to: bool):
 
 func hitProcess():
 	delHeart()
-	playerAni.play("hit")
 	$PlayerDamagePityTimer.start()
 	actualState = states.DAMAGE
 	if hearts == 0:
 		die()
 
 func die():
+	isDeath = true
 	set_physics_process(false)
 	playerAni.play("death")
 	$PlayerDeathTimer.start()
@@ -235,7 +237,6 @@ func handleHorizontalView(inputAxis):
 func handleSpeedAnimationVelocity():
 	
 	var velocityAni: float
-	
 	match actualState:
 		states.RUN:
 			velocityAni = velocity.length()/100
@@ -243,11 +244,10 @@ func handleSpeedAnimationVelocity():
 			velocityAni = attackVelocity
 		states.ATACKING_SECOND:
 			velocityAni = attackVelocity+1
-		states.DAMAGE:
-			velocityAni = 3
-			
 		states.DASH:
 			velocityAni = dashAnimationVelocity
+		_:
+			velocityAni = 3
 	playerAni.speed_scale = velocityAni
 
 func handleJump():
