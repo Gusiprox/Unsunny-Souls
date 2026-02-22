@@ -179,8 +179,9 @@ func _addPoints(amount: int):
 	ui._setPoints(points)
 
 func _addHealth():
-	hearts+=1
-	ui._setLife(hearts)
+	if hearts != iniHearts:
+		hearts+=1
+		ui._setLife(hearts)
 	
 #Cuando entra un enemigo al area de ataque
 func _onEnterDamageArea(body: Node2D):
