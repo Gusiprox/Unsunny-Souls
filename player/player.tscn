@@ -486,9 +486,7 @@ script = ExtResource("1_boad6")
 
 [node name="PlayerAni" type="AnimatedSprite2D" parent="." unique_id=257607245]
 sprite_frames = SubResource("SpriteFrames_ebec5")
-animation = &"hit"
-frame = 4
-frame_progress = 1.0
+animation = &"death"
 
 [node name="PlayerCol" type="CollisionShape2D" parent="." unique_id=1968024064]
 position = Vector2(0, 3)
@@ -524,6 +522,7 @@ offset_right = 1043.0
 offset_bottom = 86.0
 
 [node name="PlayerDeathTimer" type="Timer" parent="." unique_id=1898765586]
+wait_time = 3.0
 
 [node name="PlayerDamagePityTimer" type="Timer" parent="." unique_id=867899821]
 wait_time = 0.237
