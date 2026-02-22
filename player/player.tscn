@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bc41vr2iy75u" path="res://player/img/_Run.png" id="6_8t03j"]
 [ext_resource type="Texture2D" uid="uid://biabsd2s4fbye" path="res://player/img/_Fall.png" id="7_hg6s5"]
 [ext_resource type="PackedScene" uid="uid://dg1xfv6oxf4g6" path="res://player/ui/ui.tscn" id="9_hg6s5"]
+[ext_resource type="AudioStream" uid="uid://dl5ce8x2ddg7" path="res://player/music/atack.wav" id="12_ebec5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ieo8"]
 atlas = ExtResource("1_g6k8r")
@@ -526,5 +527,8 @@ offset_bottom = 86.0
 [node name="PlayerDamagePityTimer" type="Timer" parent="." unique_id=867899821]
 wait_time = 0.237
 one_shot = true
+
+[node name="PlayerAtackSound" type="AudioStreamPlayer" parent="." unique_id=591705562]
+stream = ExtResource("12_ebec5")
 
 [connection signal="body_entered" from="PlayerAtackAr" to="." method="_onEnterDamageArea"]

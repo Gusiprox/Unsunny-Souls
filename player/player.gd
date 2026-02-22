@@ -17,6 +17,7 @@ extends CharacterBody2D
 @onready var playerAni = $PlayerAni
 @onready var atackColLe = $PlayerAtackAr/PlayerAtackLeCol
 @onready var atackColRi = $PlayerAtackAr/PlayerAtackRiCol
+@onready var playerSoundAtack = $PlayerAtackSound
 
 enum states{
 	IDLE,
@@ -41,6 +42,7 @@ var facingRight: bool = true
 var lastFacing: bool = facingRight
 var invulnerability: bool = false
 var safeZone: Vector2 = position
+var playingAtackSound: bool = false
 
 func _ready() -> void:
 	add_to_group("player")
@@ -94,6 +96,7 @@ func _physics_process(delta: float) -> void:
 		
 		states.ATACKING:
 			playerAni.play("atack")
+	
 			handleAcceleration(inputAxis,delta, groundAcceleration)
 			decelerate()
 			if facingRight:
@@ -104,12 +107,14 @@ func _physics_process(delta: float) -> void:
 			if playerAni.frame == 3:
 				actualState = states.IDLE
 				disableAtackCol()
-				
+
 			if (playerAni.frame == 2 or playerAni.frame == 3) and Input.is_action_just_pressed("atack"):
 				actualState = states.ATACKING_SECOND
 				disableAtackCol()
+
 		states.ATACKING_SECOND:
 			playerAni.play("atack_second")
+			
 			handleAcceleration(inputAxis,delta, groundAcceleration)
 			decelerate()
 			if facingRight:
@@ -117,6 +122,7 @@ func _physics_process(delta: float) -> void:
 			else:
 				enableAtackCol(atackCol.LEFT)
 			if playerAni.frame == 5:
+				playAtackSound(false)
 				actualState = states.IDLE
 				disableAtackCol()
 		
@@ -143,7 +149,8 @@ func _physics_process(delta: float) -> void:
 				handlePhantomMode(false)
 			if playerAni.frame == 11:
 				actualState = states.IDLE
-
+	
+	handleAudio()
 	handleSpeedAnimationVelocity()
 	applyFriction(inputAxis, delta)
 	applyGravity(delta)
@@ -164,13 +171,21 @@ func _addPoints(amount: int):
 	points+=amount
 	ui._setPoints(points)
 
+func _addHealth():
+	hearts+=1
+	ui._setLife(hearts)
+	
 #Cuando entra un enemigo al area de ataque
 func _onEnterDamageArea(body: Node2D):
 	if body.is_in_group("enemies"):
-		var damage = await body._dealDamage()
-		_addPoints(damage)
+		var damagePoints = await body._dealDamage()
+		_addPoints(damagePoints)
 
-	
+func playAtackSound(to: bool):
+	if to:
+		playerSoundAtack.play()
+	else:
+		playerSoundAtack.stop()
 
 func hitProcess():
 	delHeart()
@@ -275,3 +290,14 @@ func handlePhantomMode(active: bool):
 	else:
 		collision_mask |= 2 #Ponemos la mascara
 		collision_layer |= 2
+
+func handleAudio():
+	
+	match actualState:
+		states.ATACKING:
+			if playingAtackSound == false:
+				playerSoundAtack.play(0.01)
+				playingAtackSound = true
+		states.IDLE:
+			playerSoundAtack.stop()
+			playingAtackSound = false
