@@ -6,6 +6,6 @@ func _ready():
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("jugadores"):
+	if body.is_in_group("player"):
 		body._addHealth()
 		queue_free()
