@@ -98,7 +98,7 @@ text = "Cerrar menú"
 [node name="audioMenu" type="AudioStreamPlayer2D" parent="." unique_id=763375642]
 stream = ExtResource("4_is0kx")
 autoplay = true
-parameters/looping = false
+parameters/looping = true
 
 [connection signal="pressed" from="conMenuStart/btnStart" to="." method="_on_btn_start_pressed"]
 [connection signal="pressed" from="conMenuStart/btnExit" to="." method="_on_btn_exit_pressed"]

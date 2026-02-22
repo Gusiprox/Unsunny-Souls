@@ -72,4 +72,4 @@ spawnSceneRel = ExtResource("8_cwimn")
 stream = ExtResource("7_xhe1o")
 volume_db = -14.08
 autoplay = true
-parameters/looping = false
+parameters/looping = true

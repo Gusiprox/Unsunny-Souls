@@ -54,7 +54,7 @@ text = "Salir"
 [node name="audioMenuDead" type="AudioStreamPlayer2D" parent="." unique_id=530360061]
 stream = ExtResource("4_2koq5")
 autoplay = true
-parameters/looping = false
+parameters/looping = true
 
 [connection signal="pressed" from="conMenuDead/btnRetry" to="." method="_on_btn_reload_pressed"]
 [connection signal="pressed" from="conMenuDead/btnExit" to="." method="_on_btn_exit_pressed"]
