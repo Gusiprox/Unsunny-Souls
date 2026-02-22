@@ -2,7 +2,9 @@ extends Control
 
 
 func _on_btn_reload_pressed():
-	get_tree().change_scene_to_file("res://environment/levels/nivel_1.tscn")	
+	var escena_actual = get_tree().current_scene
+	var ruta = Global.nivelActual
+	get_tree().change_scene_to_file(ruta)
 
 
 func _on_btn_exit_pressed() -> void:

@@ -15,6 +15,10 @@ run/main_scene="uid://cj8rel1p2ep57"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Global="*uid://daerr24uyw8xa"
+
 [input]
 
 move_iz={

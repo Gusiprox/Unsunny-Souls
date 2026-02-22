@@ -31,11 +31,13 @@ func crearBotonesNiveles():
 
 
 func _onNivelPressed(nivelPath: String):
+	Global.nivelActual = nivelPath
 	get_tree().change_scene_to_file(nivelPath)
 
 
 func _on_btn_random_pressed() -> void:
 	var nivelAleatorio = niveles[randi() % niveles.size()]["ruta"]
+	Global.nivelActual = nivelAleatorio
 	get_tree().change_scene_to_file(nivelAleatorio)	
 
 
