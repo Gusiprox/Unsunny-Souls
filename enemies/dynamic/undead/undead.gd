@@ -6,41 +6,43 @@ extends CharacterBody2D
 var sentido: int = 1
 
 func _ready() -> void:
+	add_to_group("enemies")
 	$UndeadAni.play("idle")
 
 func _on_undead_ar_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		body._dealDamage()
 		$UndeadAni.play("attack")
-		speed = 0
+		set_physics_process(false)
 		await $UndeadAni.animation_finished
-		speed = 100
+		set_physics_process(true)
 		$UndeadAni.play("idle")
 
 func _physics_process(delta: float) -> void:
-	# Establecemos la velocidad
 	velocity.y += gravity * delta
 	if is_on_wall():
 		sentido = -sentido
 		
-	## Si el detector delantero está detectando suelo y vamos en esa dirección
 	if sentido == 1 && $RayIzquierdo.is_colliding():
 		velocity.x = speed
 		$UndeadAni.flip_h = false
 	else:
 		sentido = -1
 	
-	## Si el detector trasero está detectando suelo y vamos en esa dirección
 	if sentido == -1 && $RayDerecho.is_colliding():
 		velocity.x = -speed
 		$UndeadAni.flip_h = true
 	else:
 		sentido = 1
 
-	# Refrescamos el juego
 	move_and_slide()
 
 func _dealDamage() -> int:
+	$UndeadCol.set_deferred("disabled", true)
+	$UndeadAr.monitoring = false
+	set_physics_process(false)
 	$UndeadAni.play("death")
+	await $UndeadAni.animation_finished
 	queue_free()
 	return points
+	
