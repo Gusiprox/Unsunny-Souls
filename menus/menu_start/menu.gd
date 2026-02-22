@@ -6,7 +6,8 @@ extends Control
 @onready var btnReturn = $panelNiveles/btnReturn
 
 var niveles = [
-	{"ruta": "res://environment/levels/nivel_1.tscn", "nombre": "Bosque"}
+	{"ruta": "res://environment/levels/nivel_1.tscn", "nombre": "Bosque"},
+	{"ruta": "res://environment/levels/nivel_2.tscn", "nombre": "Cueva Boscosa"}
 ]
 
 func _ready():
