@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://scgo0jmdiagd" path="res://menus/menu_start/menu.gd" id="1_wxlis"]
 [ext_resource type="Texture2D" uid="uid://cfbf0y6on1q4y" path="res://menus/menu_start/img/menu_start.png" id="2_poocg"]
 [ext_resource type="FontFile" uid="uid://calo67bsedgsr" path="res://menus/menu_start/font/antiquity-print.ttf" id="3_poocg"]
-[ext_resource type="AudioStream" uid="uid://dg2vn5wt77vyo" path="res://common/music/forgotten-hero-records-medieval-escape-420206.mp3" id="4_is0kx"]
+[ext_resource type="AudioStream" uid="uid://dg2vn5wt77vyo" path="res://common/music/menu.mp3" id="4_is0kx"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_is0kx"]
 line_spacing = 1.0

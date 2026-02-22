@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://fywftwl4ldob" path="res://environment/utils/spawner.tscn" id="5_ysbf6"]
 [ext_resource type="PackedScene" uid="uid://dd7x5ghibet2n" path="res://enemies/dynamic/undead/undead.tscn" id="6_22dqu"]
 [ext_resource type="PackedScene" uid="uid://b8slb5pgvfm8x" path="res://enemies/dynamic/ghost/ghost.tscn" id="6_tvj33"]
-[ext_resource type="AudioStream" uid="uid://c3nyovix47gdx" path="res://common/music/emmraan-medieval-adventure-270566.mp3" id="7_xhe1o"]
+[ext_resource type="AudioStream" uid="uid://c3nyovix47gdx" path="res://common/music/nivelBosque.mp3" id="7_xhe1o"]
 [ext_resource type="PackedScene" uid="uid://byblu1bdh872d" path="res://powerups/heart/heart.tscn" id="8_cwimn"]
 
 [node name="Nivel1" type="Node2D" unique_id=839680383]

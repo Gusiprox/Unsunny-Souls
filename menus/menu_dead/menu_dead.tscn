@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cltp2lv6ie74e" path="res://menus/menu_dead/img/dead.png" id="1_14ymk"]
 [ext_resource type="Script" uid="uid://bnatwiliv8ieg" path="res://menus/menu_dead/menu_dead.gd" id="1_bn14s"]
 [ext_resource type="FontFile" uid="uid://calo67bsedgsr" path="res://menus/menu_start/font/antiquity-print.ttf" id="2_bn14s"]
+[ext_resource type="AudioStream" uid="uid://oj50d7ifn43m" path="res://common/music/menuDead.mp3" id="4_2koq5"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2koq5"]
 font = ExtResource("2_bn14s")
@@ -49,6 +50,11 @@ text = "Volver a intentar"
 modulate = Color(3.5229437, 1.6784357, 1.7045296, 0.8627451)
 layout_mode = 2
 text = "Salir"
+
+[node name="audioMenuDead" type="AudioStreamPlayer2D" parent="." unique_id=530360061]
+stream = ExtResource("4_2koq5")
+autoplay = true
+parameters/looping = false
 
 [connection signal="pressed" from="conMenuDead/btnRetry" to="." method="_on_btn_reload_pressed"]
 [connection signal="pressed" from="conMenuDead/btnExit" to="." method="_on_btn_exit_pressed"]
