@@ -156,8 +156,6 @@ func _dealDamage():
 	hitProcess()
 
 func _dealSpikeDamage():
-	if invulnerability: 
-		return
 	position = safeZone
 	velocity = Vector2(0,0)
 	hitProcess()

@@ -9,6 +9,7 @@ extends Node2D
 @onready var timer = $SpawnerTimer
 
 var canSpawn: bool = true
+var playerInside: bool = false
  
 func  _ready() -> void:
 	startTimer()
@@ -19,6 +20,9 @@ func _onSpawnerTimerTimeout() -> void:
 		canSpawn = false
 	else :
 		canSpawn = true
+	
+	if playerInside:
+		canSpawn = false
 
 	if canSpawn:
 		instanceScene()
@@ -41,8 +45,9 @@ func getRandomNumber(minim: float, maxim: float) -> float:
 
 func _onSpawnerArBodyEntered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		canSpawn = false
+		playerInside = true
 
 func _onSpawnerArBodyExit(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		canSpawn = true
+		playerInside = false
+		
