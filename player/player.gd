@@ -155,8 +155,8 @@ func _addPoints(amount: int):
 #Cuando entra un enemigo al area de ataque
 func _onEnterDamageArea(body: Node2D):
 	if body.is_in_group("enemies"):
-		body._dealDamage()
-		_addPoints(3)
+		
+		_addPoints(body._dealDamage())
 
 func die():
 	set_physics_process(false)
