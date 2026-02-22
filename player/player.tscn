@@ -508,6 +508,10 @@ debug_color = Color(0.57254905, 0.17254902, 0.41960785, 1)
 
 [node name="PlayerCamera" type="Camera2D" parent="." unique_id=1574912564]
 zoom = Vector2(1.4, 1.4)
+limit_left = 0
+limit_top = 0
+limit_right = 1673
+limit_bottom = 665
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=442917148]
 
