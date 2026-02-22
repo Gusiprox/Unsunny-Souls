@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bc41vr2iy75u" path="res://player/img/_Run.png" id="6_8t03j"]
 [ext_resource type="Texture2D" uid="uid://biabsd2s4fbye" path="res://player/img/_Fall.png" id="7_hg6s5"]
 [ext_resource type="PackedScene" uid="uid://dg1xfv6oxf4g6" path="res://player/ui/ui.tscn" id="9_hg6s5"]
+[ext_resource type="AudioStream" uid="uid://dl5ce8x2ddg7" path="res://player/music/atack.wav" id="12_ebec5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ieo8"]
 atlas = ExtResource("1_g6k8r")
@@ -481,6 +482,8 @@ size = Vector2(17, 34)
 size = Vector2(36, 41)
 
 [node name="Player" type="CharacterBody2D" unique_id=1655714033]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_boad6")
 
 [node name="PlayerAni" type="AnimatedSprite2D" parent="." unique_id=257607245]
@@ -492,6 +495,7 @@ frame_progress = 1.0
 [node name="PlayerCol" type="CollisionShape2D" parent="." unique_id=1968024064]
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_yllr7")
+one_way_collision = true
 
 [node name="PlayerAtackAr" type="Area2D" parent="." unique_id=1094434331]
 position = Vector2(5, 0)
@@ -526,5 +530,8 @@ offset_bottom = 86.0
 [node name="PlayerDamagePityTimer" type="Timer" parent="." unique_id=867899821]
 wait_time = 0.237
 one_shot = true
+
+[node name="PlayerAtackSound" type="AudioStreamPlayer" parent="." unique_id=591705562]
+stream = ExtResource("12_ebec5")
 
 [connection signal="body_entered" from="PlayerAtackAr" to="." method="_onEnterDamageArea"]
