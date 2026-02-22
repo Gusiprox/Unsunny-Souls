@@ -108,7 +108,7 @@ func _physics_process(delta: float) -> void:
 				actualState = states.IDLE
 				disableAtackCol()
 
-			if (playerAni.frame == 2 or playerAni.frame == 3) and Input.is_action_just_pressed("atack"):
+			if (playerAni.frame >= 2) and Input.is_action_just_pressed("atack"):
 				actualState = states.ATACKING_SECOND
 				disableAtackCol()
 
@@ -124,6 +124,11 @@ func _physics_process(delta: float) -> void:
 			if playerAni.frame == 5:
 				playAtackSound(false)
 				actualState = states.IDLE
+				disableAtackCol()
+				
+			if (playerAni.frame >= 3) and Input.is_action_just_pressed("atack"):
+				actualState = states.ATACKING
+				playingAtackSound = false
 				disableAtackCol()
 		
 		states.DAMAGE:
@@ -296,7 +301,7 @@ func handleAudio():
 	match actualState:
 		states.ATACKING:
 			if playingAtackSound == false:
-				playerSoundAtack.play(0.01)
+				playerSoundAtack.play()
 				playingAtackSound = true
 		states.IDLE:
 			playerSoundAtack.stop()
