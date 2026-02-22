@@ -1,0 +1,145 @@
+[gd_scene format=3 uid="uid://b8slb5pgvfm8x"]
+
+[ext_resource type="Texture2D" uid="uid://u4ja1sx0kcpu" path="res://enemies/dynamic/ghost/img/summonIdle.png" id="1_15g15"]
+[ext_resource type="Texture2D" uid="uid://dlu4gt7c6074m" path="res://enemies/dynamic/ghost/img/summonDeath.png" id="1_h84aa"]
+[ext_resource type="Script" uid="uid://bm6jkq7bmej00" path="res://enemies/dynamic/ghost/ghost.gd" id="1_lglpm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hrn7e"]
+atlas = ExtResource("1_h84aa")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbl1w"]
+atlas = ExtResource("1_h84aa")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fop7x"]
+atlas = ExtResource("1_h84aa")
+region = Rect2(100, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jcpyt"]
+atlas = ExtResource("1_h84aa")
+region = Rect2(0, 50, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3uj5m"]
+atlas = ExtResource("1_h84aa")
+region = Rect2(50, 50, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h84aa"]
+atlas = ExtResource("1_15g15")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lglpm"]
+atlas = ExtResource("1_15g15")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4vs6u"]
+atlas = ExtResource("1_15g15")
+region = Rect2(100, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ilhyu"]
+atlas = ExtResource("1_15g15")
+region = Rect2(150, 0, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hrn7e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hrn7e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rbl1w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fop7x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jcpyt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3uj5m")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h84aa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lglpm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4vs6u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ilhyu")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xdqns"]
+size = Vector2(12, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nkqtq"]
+size = Vector2(18, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h84aa"]
+size = Vector2(197.5, 423)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lglpm"]
+size = Vector2(423, 195.25)
+
+[node name="GhostChar" type="CharacterBody2D" unique_id=622613421]
+script = ExtResource("1_lglpm")
+
+[node name="GhostAni" type="AnimatedSprite2D" parent="." unique_id=193945069]
+sprite_frames = SubResource("SpriteFrames_hrn7e")
+animation = &"idle"
+
+[node name="GhostCol" type="CollisionShape2D" parent="." unique_id=1067789862]
+position = Vector2(-1, 3)
+shape = SubResource("RectangleShape2D_xdqns")
+
+[node name="GhostArAtk" type="Area2D" parent="." unique_id=444349216]
+
+[node name="GhostColAtk" type="CollisionShape2D" parent="GhostArAtk" unique_id=871210402]
+position = Vector2(-1, 3)
+shape = SubResource("RectangleShape2D_nkqtq")
+
+[node name="GhostArSearchLeft" type="Area2D" parent="." unique_id=335973845]
+
+[node name="GhostColSearchLeft" type="CollisionShape2D" parent="GhostArSearchLeft" unique_id=1963101109]
+position = Vector2(-113.25, 1.5)
+shape = SubResource("RectangleShape2D_h84aa")
+
+[node name="GhostArSearchRight" type="Area2D" parent="." unique_id=1815892430]
+
+[node name="GhostColSearchRight" type="CollisionShape2D" parent="GhostArSearchRight" unique_id=1736190954]
+position = Vector2(112, 3)
+shape = SubResource("RectangleShape2D_h84aa")
+
+[node name="GhostArSearchUp" type="Area2D" parent="." unique_id=2145950451]
+
+[node name="GhostColSearchUp" type="CollisionShape2D" parent="GhostArSearchUp" unique_id=1782715916]
+position = Vector2(-0.5, -119)
+shape = SubResource("RectangleShape2D_lglpm")
+
+[node name="GhostArSearchDown" type="Area2D" parent="." unique_id=988750992]
+
+[node name="GhostColSearchDown" type="CollisionShape2D" parent="GhostArSearchDown" unique_id=1184090574]
+position = Vector2(0, 126)
+shape = SubResource("RectangleShape2D_lglpm")
+
+[node name="TimerReactivateSearch" type="Timer" parent="." unique_id=1225831164]
+wait_time = 0.1
+
+[connection signal="body_entered" from="GhostArAtk" to="." method="_on_ghost_ar_atk_body_entered"]
+[connection signal="body_entered" from="GhostArSearchLeft" to="." method="_on_ghost_ar_search_left_body_entered"]
+[connection signal="body_entered" from="GhostArSearchRight" to="." method="_on_ghost_ar_search_right_body_entered"]
+[connection signal="body_entered" from="GhostArSearchUp" to="." method="_on_ghost_ar_search_up_body_entered"]
+[connection signal="body_exited" from="GhostArSearchUp" to="." method="_on_ghost_ar_search_up_body_exited"]
+[connection signal="body_entered" from="GhostArSearchDown" to="." method="_on_ghost_ar_search_down_body_entered"]
+[connection signal="body_exited" from="GhostArSearchDown" to="." method="_on_ghost_ar_search_down_body_exited"]
