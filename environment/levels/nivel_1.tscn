@@ -6,7 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://ybomf60r05d8" path="res://player/player.tscn" id="4_ysbf6"]
 [ext_resource type="PackedScene" uid="uid://fywftwl4ldob" path="res://environment/utils/spawner.tscn" id="5_ysbf6"]
 [ext_resource type="PackedScene" uid="uid://dd7x5ghibet2n" path="res://enemies/dynamic/undead/undead.tscn" id="6_22dqu"]
+[ext_resource type="PackedScene" uid="uid://b8slb5pgvfm8x" path="res://enemies/dynamic/ghost/ghost.tscn" id="6_tvj33"]
 [ext_resource type="AudioStream" uid="uid://c3nyovix47gdx" path="res://common/music/emmraan-medieval-adventure-270566.mp3" id="7_xhe1o"]
+[ext_resource type="PackedScene" uid="uid://byblu1bdh872d" path="res://powerups/heart/heart.tscn" id="8_cwimn"]
 
 [node name="Nivel1" type="Node2D" unique_id=839680383]
 
@@ -34,25 +36,37 @@ position = Vector2(66, 571)
 
 [node name="spawners" type="Node2D" parent="." unique_id=645330586]
 
-[node name="spawner1" parent="spawners" unique_id=1230627805 instance=ExtResource("5_ysbf6")]
+[node name="spawnUndead" parent="spawners" unique_id=1230627805 instance=ExtResource("5_ysbf6")]
 position = Vector2(1059, 552)
 sceneScale = 1.0
 spawnSceneRel = ExtResource("6_22dqu")
 
-[node name="spawner2" parent="spawners" unique_id=476506422 instance=ExtResource("5_ysbf6")]
+[node name="spawnGhost" parent="spawners" unique_id=476506422 instance=ExtResource("5_ysbf6")]
 position = Vector2(1622, 275)
 sceneScale = 1.0
-spawnSceneRel = ExtResource("6_22dqu")
+spawnSceneRel = ExtResource("6_tvj33")
 
-[node name="spawner3" parent="spawners" unique_id=1985803086 instance=ExtResource("5_ysbf6")]
+[node name="spawnGhost2" parent="spawners" unique_id=1985803086 instance=ExtResource("5_ysbf6")]
 position = Vector2(537, 183)
 sceneScale = 1.0
-spawnSceneRel = ExtResource("6_22dqu")
+spawnSceneRel = ExtResource("6_tvj33")
 
-[node name="spawner4" parent="spawners" unique_id=1647592815 instance=ExtResource("5_ysbf6")]
+[node name="spawnUndead2" parent="spawners" unique_id=1647592815 instance=ExtResource("5_ysbf6")]
 position = Vector2(395, 551)
 sceneScale = 1.0
 spawnSceneRel = ExtResource("6_22dqu")
+
+[node name="spawnHeart" parent="spawners" unique_id=705526462 instance=ExtResource("5_ysbf6")]
+position = Vector2(47, 287)
+sceneScale = 0.07
+limitInScene = 1
+spawnSceneRel = ExtResource("8_cwimn")
+
+[node name="spawnHeart2" parent="spawners" unique_id=1111353109 instance=ExtResource("5_ysbf6")]
+position = Vector2(1348, 378)
+sceneScale = 0.07
+limitInScene = 1
+spawnSceneRel = ExtResource("8_cwimn")
 
 [node name="audioNivel1" type="AudioStreamPlayer2D" parent="." unique_id=2060516707]
 stream = ExtResource("7_xhe1o")
