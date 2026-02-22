@@ -258,7 +258,7 @@ animations = [{
 size = Vector2(39, 58)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nl5ds"]
-size = Vector2(41, 60)
+size = Vector2(48, 60)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_emhp7"]
 size = Vector2(236.5, 357)
@@ -278,7 +278,7 @@ shape = SubResource("RectangleShape2D_1uk4o")
 [node name="UndeadArAtk" type="Area2D" parent="." unique_id=298549467]
 
 [node name="UndeadColAtk" type="CollisionShape2D" parent="UndeadArAtk" unique_id=1686690810]
-position = Vector2(20.5, 14)
+position = Vector2(20, 14)
 shape = SubResource("RectangleShape2D_nl5ds")
 
 [node name="UndeadArSearchLeft" type="Area2D" parent="." unique_id=1375993233]
