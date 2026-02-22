@@ -20,6 +20,8 @@ Su funcion es instanciar enemigos (principalmente) en escena en `tiempo de ejecu
 
 6. Si al crearse son muy grandes/pequeños modifica el `Scene Scale` es la escala de lo que quieras spawnear
 
+7. Modificar `Limit In Scene` Para poner un limite de spawn, este limite funciona acorde a las entidades que el mismo tiene en ese momento, si se elimina una vuelve a poder spawnear otro
+
 7. Pruebalo
 
 ## Dudas posibles

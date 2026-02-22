@@ -3,23 +3,29 @@ extends Node2D
 @export var minSpawnWait = 4
 @export var maxSpawnWait = 10
 @export var sceneScale = 1.0
+@export var limitInScene = 5
 @export var spawnSceneRel: PackedScene
 
 @onready var timer = $SpawnerTimer
 
 var canSpawn: bool = true
-
+ 
 func  _ready() -> void:
 	startTimer()
 	
 func _onSpawnerTimerTimeout() -> void:	
+	
+	if get_child_count()-2 >= limitInScene:
+		canSpawn = false
+	else :
+		canSpawn = true
+
 	if canSpawn:
 		instanceScene()
 	startTimer()
 
 func instanceScene():
 	var scene = spawnSceneRel.instantiate()
-	#scene.position = position
 	scene.scale = Vector2(sceneScale, sceneScale)
 	add_child(scene)
 
