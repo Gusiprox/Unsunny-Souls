@@ -135,6 +135,7 @@ func _physics_process(delta: float) -> void:
 		states.DAMAGE:
 			if !isDeath:
 				playerAni.play("hit")
+			disableAtackCol()
 			invulnerability = true
 			if $PlayerDamagePityTimer.is_stopped():
 				actualState = states.IDLE
