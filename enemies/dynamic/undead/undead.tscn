@@ -260,6 +260,9 @@ size = Vector2(39, 58)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nl5ds"]
 size = Vector2(41, 60)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_emhp7"]
+size = Vector2(236.5, 357)
+
 [node name="UndeadChar" type="CharacterBody2D" unique_id=1273867503]
 script = ExtResource("1_emhp7")
 
@@ -272,18 +275,34 @@ animation = &"death"
 position = Vector2(20.5, 14)
 shape = SubResource("RectangleShape2D_1uk4o")
 
-[node name="UndeadAr" type="Area2D" parent="." unique_id=298549467]
+[node name="UndeadArAtk" type="Area2D" parent="." unique_id=298549467]
 
-[node name="UndeadColAtk" type="CollisionShape2D" parent="UndeadAr" unique_id=1686690810]
+[node name="UndeadColAtk" type="CollisionShape2D" parent="UndeadArAtk" unique_id=1686690810]
 position = Vector2(20.5, 14)
 shape = SubResource("RectangleShape2D_nl5ds")
 
-[node name="RayIzquierdo" type="RayCast2D" parent="." unique_id=151892333]
-position = Vector2(-1, 0)
+[node name="UndeadArSearchLeft" type="Area2D" parent="." unique_id=1375993233]
+
+[node name="UndeadColSearchLeft" type="CollisionShape2D" parent="UndeadArSearchLeft" unique_id=676053221]
+position = Vector2(-109, 14)
+shape = SubResource("RectangleShape2D_emhp7")
+
+[node name="UndeadArSearchRight" type="Area2D" parent="." unique_id=1670263381]
+
+[node name="UndeadColSearchRight" type="CollisionShape2D" parent="UndeadArSearchRight" unique_id=739692398]
+position = Vector2(150, 14)
+shape = SubResource("RectangleShape2D_emhp7")
+
+[node name="RayLeft" type="RayCast2D" parent="." unique_id=151892333]
+position = Vector2(-2, 13)
 target_position = Vector2(0, 45)
 
-[node name="RayDerecho" type="RayCast2D" parent="." unique_id=1163209853]
-position = Vector2(42, 0)
+[node name="RayRight" type="RayCast2D" parent="." unique_id=1163209853]
+position = Vector2(43, 14)
 target_position = Vector2(0, 45)
 
-[connection signal="body_entered" from="UndeadAr" to="." method="_on_undead_ar_body_entered"]
+[connection signal="body_entered" from="UndeadArAtk" to="." method="_on_undead_ar_atk_body_entered"]
+[connection signal="body_entered" from="UndeadArAtk" to="." method="_on_undead_ar_body_entered"]
+[connection signal="body_entered" from="UndeadArSearchLeft" to="." method="_on_undead_ar_search_left_body_entered"]
+[connection signal="body_entered" from="UndeadArSearchLeft" to="." method="_on_undead_ar_search_body_entered"]
+[connection signal="body_entered" from="UndeadArSearchRight" to="." method="_on_undead_ar_search_right_body_entered"]
