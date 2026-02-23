@@ -89,7 +89,7 @@ spawnSceneRel = ExtResource("7_amrqy")
 stream = ExtResource("9_044io")
 volume_db = -14.08
 autoplay = true
-parameters/looping = false
+parameters/looping = true
 
 [node name="Enemies" type="Node2D" parent="." unique_id=538536032]
 
