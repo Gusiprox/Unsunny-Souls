@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://biabsd2s4fbye" path="res://player/img/_Fall.png" id="7_hg6s5"]
 [ext_resource type="PackedScene" uid="uid://dg1xfv6oxf4g6" path="res://player/ui/ui.tscn" id="9_hg6s5"]
 [ext_resource type="AudioStream" uid="uid://dl5ce8x2ddg7" path="res://player/music/atack.wav" id="12_ebec5"]
+[ext_resource type="Texture2D" uid="uid://cugs6r3e1k7ow" path="res://player/img/damage_effect.png" id="12_yllr7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ieo8"]
 atlas = ExtResource("1_g6k8r")
@@ -524,6 +525,13 @@ offset_left = 1043.0
 offset_top = 86.0
 offset_right = 1043.0
 offset_bottom = 86.0
+
+[node name="DamageSprite" type="Sprite2D" parent="CanvasLayer" unique_id=1324264263]
+visible = false
+position = Vector2(-9.999878, -16)
+scale = Vector2(0.6140625, 0.62499994)
+texture = ExtResource("12_yllr7")
+centered = false
 
 [node name="PlayerDeathTimer" type="Timer" parent="." unique_id=1898765586]
 wait_time = 3.0

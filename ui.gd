@@ -1,16 +1,22 @@
 extends Control
 
-func _ready() -> void:
-	$UIAni.frame = 5
+@onready var pointsText = $UILbl
+@onready var uiAni = $UIAni
 
+var lastCoins: int
+
+func _ready() -> void:
+	uiAni.frame = 5
+	lastCoins = 0
+	
 func _setLife(count: int):
 	if count > 5 or count < 0:
 		return
-	$UIAni.frame = count
+	uiAni.frame = count
 
 func _setPoints(count: int):
-	$UILbl.text = parseToPoints(count)
-	
+	pointsText.text = parseToPoints(count)
+
 func parseToPoints(count: int) -> String:
 	if count >= 10000:
 		return "9999"

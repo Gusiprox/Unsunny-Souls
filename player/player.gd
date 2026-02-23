@@ -18,6 +18,8 @@ extends CharacterBody2D
 @onready var atackColLe = $PlayerAtackAr/PlayerAtackLeCol
 @onready var atackColRi = $PlayerAtackAr/PlayerAtackRiCol
 @onready var playerSoundAtack = $PlayerAtackSound
+@onready var damageSprite = $CanvasLayer/DamageSprite
+@onready var damagePityTimer = $PlayerDamagePityTimer
 
 enum states{
 	IDLE,
@@ -38,8 +40,8 @@ var extraJump: int = iniExtraJump
 var hearts: int = iniHearts
 var points: int = iniPoints
 var actualState: states = states.IDLE
-var facingRight: bool = true
-var lastFacing: bool = facingRight
+var facingLeft: bool = false
+var lastFacing: bool = facingLeft
 var invulnerability: bool = false
 var safeZone: Vector2 = position
 var playingAtackSound: bool = false
@@ -104,7 +106,7 @@ func _physics_process(delta: float) -> void:
 	
 			handleAcceleration(inputAxis,delta, groundAcceleration)
 			decelerate()
-			if facingRight:
+			if facingLeft:
 				enableAtackCol(atackCol.RIGHT)
 			else:
 				enableAtackCol(atackCol.LEFT)
@@ -122,7 +124,7 @@ func _physics_process(delta: float) -> void:
 			
 			handleAcceleration(inputAxis,delta, groundAcceleration)
 			decelerate()
-			if facingRight:
+			if facingLeft:
 				enableAtackCol(atackCol.RIGHT)
 			else:
 				enableAtackCol(atackCol.LEFT)
@@ -141,14 +143,15 @@ func _physics_process(delta: float) -> void:
 				playerAni.play("hit")
 			disableAtackCol()
 			invulnerability = true
-			if $PlayerDamagePityTimer.is_stopped():
+			if damagePityTimer.is_stopped() and !isDeath:
 				actualState = states.IDLE
 				invulnerability = false
+				setDamagePity(false)
 		
 		states.DASH:
 			playerAni.play("dash")
 			
-			if facingRight:
+			if facingLeft:
 				velocity.x = dashForce * -1
 			else:
 				velocity.x = dashForce
@@ -201,17 +204,21 @@ func playAtackSound(to: bool):
 	else:
 		playerSoundAtack.stop()
 
+func setDamagePity(visibleTo: bool):
+	damageSprite.visible = visibleTo
+
 func hitProcess():
 	delHeart()
-	$PlayerDamagePityTimer.start()
+	damagePityTimer.start()
 	actualState = states.DAMAGE
+	setDamagePity(true)
 	if hearts == 0:
 		die()
 
 func die():
 	isDeath = true
-	set_physics_process(false)
 	playerAni.play("death")
+	handlePhantomMode(true)
 	$PlayerDeathTimer.start()
 	await $PlayerDeathTimer.timeout
 	get_tree().change_scene_to_file("res://menus/menu_dead/menu_dead.tscn")
@@ -225,7 +232,7 @@ func returnExtraJump():
 
 func handleAcceleration(inputAxis, delta, acceleration):
 	if inputAxis != 0:
-		if lastFacing != facingRight:
+		if lastFacing != facingLeft:
 			decelerate()
 		velocity.x = move_toward(velocity.x, speed*inputAxis, acceleration*delta)
 
@@ -234,12 +241,12 @@ func decelerate():
 	
 func handleHorizontalView(inputAxis):
 		if inputAxis != 0:
-			lastFacing = facingRight
+			lastFacing = facingLeft
 			if inputAxis < 0:
-				facingRight = true
+				facingLeft = true
 			else:
-				facingRight = false
-			playerAni.flip_h = facingRight
+				facingLeft = false
+			playerAni.flip_h = facingLeft
 
 func handleSpeedAnimationVelocity():
 	
