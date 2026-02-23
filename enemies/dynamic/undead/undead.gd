@@ -31,7 +31,7 @@ func _physics_process(delta: float) -> void:
 	
 	if is_on_wall():
 		way = -way
-		reactivateSearchCollisions()
+		resetSearchCollisions()
 		
 	if way == 1 && rightRay.is_colliding():
 		velocity.x = speed
@@ -46,7 +46,7 @@ func _physics_process(delta: float) -> void:
 		way = 1
 
 	if (leftRay.is_colliding() == false || rightRay.is_colliding() == false):
-		reactivateSearchCollisions()
+		resetSearchCollisions()
 
 	move_and_slide()
 
@@ -75,7 +75,7 @@ func _on_undead_ar_search_right_body_entered(body: Node2D) -> void:
 		way = 1
 		enemyAnimations.flip_h = false
 
-func reactivateSearchCollisions() -> void:
+func resetSearchCollisions() -> void:
 	TimerReactivateSearch.start()
 	enemyRightSearchCollisions.set_deferred("disabled", true)
 	enemyLeftSearchCollisions.set_deferred("disabled", true)

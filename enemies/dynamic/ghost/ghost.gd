@@ -29,7 +29,7 @@ func _physics_process(_delta: float) -> void:
 		
 	if is_on_wall():
 		horizontalWay = -horizontalWay
-		reactivateSearchCollisions()
+		resetSearchCollisions()
 		
 	if horizontalWay == 1:
 		velocity.x = Horizontalspeed
@@ -92,7 +92,7 @@ func die() -> void:
 	await enemyAnimations.animation_finished
 	queue_free()
 
-func reactivateSearchCollisions() -> void:
+func resetSearchCollisions() -> void:
 	TimerReactivateSearch.start()
 	enemyRightSearchCollisions.set_deferred("disabled", true)
 	enemyLeftSearchCollisions.set_deferred("disabled", true)
