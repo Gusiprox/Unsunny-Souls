@@ -44,16 +44,23 @@ label_settings = SubResource("LabelSettings_2koq5")
 [node name="btnRetry" type="Button" parent="conMenuDead" unique_id=511375562]
 modulate = Color(3.5229437, 1.6784357, 1.7045296, 0.8627451)
 layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_bn14s")
+theme_override_font_sizes/font_size = 14
 text = "Volver a intentar"
 
 [node name="btnMainMenu" type="Button" parent="conMenuDead" unique_id=1695735098]
 modulate = Color(3.523429, 1.6745241, 1.701127, 0.8627451)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_bn14s")
+theme_override_font_sizes/font_size = 14
 text = "Menú Principal"
 
 [node name="btnExit" type="Button" parent="conMenuDead" unique_id=337582231]
 modulate = Color(3.523, 1.678, 1.705, 0.863)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_bn14s")
+theme_override_font_sizes/font_size = 14
 text = "Salir"
 
 [node name="audioMenuDead" type="AudioStreamPlayer2D" parent="." unique_id=530360061]
