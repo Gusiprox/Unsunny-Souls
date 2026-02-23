@@ -18,6 +18,7 @@ extends CharacterBody2D
 @onready var atackColLe = $PlayerAtackAr/PlayerAtackLeCol
 @onready var atackColRi = $PlayerAtackAr/PlayerAtackRiCol
 @onready var playerSoundAtack = $PlayerAtackSound
+@onready var playerSoundDamage = $PlayerDamageSound
 @onready var damageSprite = $CanvasLayer/DamageSprite
 @onready var damagePityTimer = $PlayerDamagePityTimer
 
@@ -147,6 +148,7 @@ func _physics_process(delta: float) -> void:
 				actualState = states.IDLE
 				invulnerability = false
 				setDamagePity(false)
+				playDamageSound(false)
 		
 		states.DASH:
 			playerAni.play("dash")
@@ -204,6 +206,12 @@ func playAtackSound(to: bool):
 	else:
 		playerSoundAtack.stop()
 
+func playDamageSound(to: bool):
+	if to:
+		playerSoundDamage.play(0.2)
+	else:
+		playerSoundDamage.stop()
+
 func setDamagePity(visibleTo: bool):
 	damageSprite.visible = visibleTo
 
@@ -212,6 +220,7 @@ func hitProcess():
 	damagePityTimer.start()
 	actualState = states.DAMAGE
 	setDamagePity(true)
+	playDamageSound(true)
 	if hearts == 0:
 		die()
 

@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dg1xfv6oxf4g6" path="res://player/ui/ui.tscn" id="9_hg6s5"]
 [ext_resource type="AudioStream" uid="uid://dl5ce8x2ddg7" path="res://player/music/atack.wav" id="12_ebec5"]
 [ext_resource type="Texture2D" uid="uid://cugs6r3e1k7ow" path="res://player/img/damage_effect.png" id="12_yllr7"]
+[ext_resource type="AudioStream" uid="uid://dqaw0i81dhmxf" path="res://player/music/damage.wav" id="14_kb6p2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ieo8"]
 atlas = ExtResource("1_g6k8r")
@@ -542,5 +543,8 @@ one_shot = true
 
 [node name="PlayerAtackSound" type="AudioStreamPlayer" parent="." unique_id=591705562]
 stream = ExtResource("12_ebec5")
+
+[node name="PlayerDamageSound" type="AudioStreamPlayer" parent="." unique_id=585526410]
+stream = ExtResource("14_kb6p2")
 
 [connection signal="body_entered" from="PlayerAtackAr" to="." method="_onEnterDamageArea"]
