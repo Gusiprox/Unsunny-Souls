@@ -41,10 +41,16 @@ offset_bottom = 343.0
 
 [node name="btnStart" type="Button" parent="conMenuStart" unique_id=1563671365]
 layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_poocg")
+theme_override_font_sizes/font_size = 14
 text = "Jugar"
 
 [node name="btnExit" type="Button" parent="conMenuStart" unique_id=83390422]
 layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_poocg")
+theme_override_font_sizes/font_size = 14
 text = "Salir"
 
 [node name="lblNombJuego" type="Label" parent="." unique_id=1764377273]
@@ -81,18 +87,22 @@ alignment = 1
 
 [node name="btnRandom" type="Button" parent="panelNiveles" unique_id=804882954]
 layout_mode = 0
-offset_left = 147.0
+offset_left = 140.0
 offset_top = 133.0
-offset_right = 268.0
+offset_right = 274.0
 offset_bottom = 177.0
+theme_override_fonts/font = ExtResource("3_poocg")
+theme_override_font_sizes/font_size = 14
 text = "Nivel aleatorio"
 
 [node name="btnReturn" type="Button" parent="panelNiveles" unique_id=381846608]
 layout_mode = 0
-offset_left = 112.0
+offset_left = 109.0
 offset_top = 186.0
-offset_right = 308.0
+offset_right = 305.0
 offset_bottom = 217.0
+theme_override_fonts/font = ExtResource("3_poocg")
+theme_override_font_sizes/font_size = 14
 text = "Cerrar menú"
 
 [node name="audioMenu" type="AudioStreamPlayer2D" parent="." unique_id=763375642]
