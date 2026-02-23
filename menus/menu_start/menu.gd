@@ -13,6 +13,7 @@ var niveles = [
 ]
 
 func _ready():
+	randomize()
 	panelNiveles.visible = false
 	crearBotonesNiveles()
 
@@ -44,7 +45,8 @@ func _onNivelPressed(nivelPath: String):
 
 
 func _on_btn_random_pressed() -> void:
-	var nivelAleatorio = niveles[randi() % niveles.size()]["ruta"]
+	var index = randi_range(0, niveles.size() - 1)
+	var nivelAleatorio = niveles[index]["ruta"]
 	Global.nivelActual = nivelAleatorio
 	get_tree().change_scene_to_file(nivelAleatorio)	
 
