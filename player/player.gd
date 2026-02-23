@@ -56,12 +56,13 @@ func _physics_process(delta: float) -> void:
 	var inputAxis = Input.get_axis("move_iz", "move_de")
 	
 	match actualState:
-
 		states.IDLE:
 			playerAni.play("idle")
 			
 			if is_on_floor():
 				safeZone = position
+			if !is_on_floor():
+				actualState = states.FALLING
 			if inputAxis != 0:
 				actualState = states.RUN
 			if Input.is_action_just_pressed("atack"):
@@ -87,6 +88,7 @@ func _physics_process(delta: float) -> void:
 		states.FALLING:
 			handleAcceleration(inputAxis, delta, airAcceleration)
 			handleJumpSecond()
+			handleHorizontalView(inputAxis)
 			if velocity.y > 0:
 				playerAni.play("fall")
 			if is_on_floor():
@@ -94,6 +96,8 @@ func _physics_process(delta: float) -> void:
 				actualState = states.IDLE
 			if Input.is_action_just_pressed("atack"):
 				actualState = states.ATACKING
+			if Input.is_action_just_pressed("dash"):
+				actualState = states.DASH
 		
 		states.ATACKING:
 			playerAni.play("atack")
@@ -151,12 +155,13 @@ func _physics_process(delta: float) -> void:
 			
 			if playerAni.frame >= 9:
 				invulnerability = false
-				handlePhantomMode(true)
+				handlePhantomMode(false)
 			else:
 				invulnerability = true
-				handlePhantomMode(false)
+				handlePhantomMode(true)
 			if playerAni.frame == 11:
 				actualState = states.IDLE
+				decelerate()
 	
 	handleAudio()
 	handleSpeedAnimationVelocity()
@@ -292,10 +297,10 @@ func disableAtackCol():
 
 func handlePhantomMode(active: bool):
 	if active:
-		collision_mask &= ~2 #Quitamos la mascara 1
+		collision_mask &= ~2
 		collision_layer &= ~2
 	else:
-		collision_mask |= 2 #Ponemos la mascara
+		collision_mask |= 2
 		collision_layer |= 2
 
 func handleAudio():
