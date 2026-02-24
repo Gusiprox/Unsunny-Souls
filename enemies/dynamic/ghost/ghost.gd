@@ -85,16 +85,6 @@ func _on_ghost_ar_search_down_body_exited(body: Node2D) -> void:
 	if body.is_in_group(groupPlayer):
 		Verticalspeed = 0
 
-func die() -> void:
-	enemyCollisions.set_deferred("disabled", true)
-	attackArea.set_deferred("monitoring", false)
-	set_physics_process(false)
-	
-	deathAudio.play()
-	enemyAnimations.play(deathAnimation)
-	await enemyAnimations.animation_finished
-	queue_free()
-
 func resetSearchCollisions() -> void:
 	TimerReactivateSearch.start()
 	
@@ -105,3 +95,13 @@ func resetSearchCollisions() -> void:
 	
 	enemyRightSearchCollisions.set_deferred("disabled", false)
 	enemyLeftSearchCollisions.set_deferred("disabled", false)
+
+func die() -> void:
+	enemyCollisions.set_deferred("disabled", true)
+	attackArea.set_deferred("monitoring", false)
+	set_physics_process(false)
+	
+	deathAudio.play()
+	enemyAnimations.play(deathAnimation)
+	await enemyAnimations.animation_finished
+	queue_free()

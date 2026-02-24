@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dnfo7eprrh2sh" path="res://enemies/dynamic/undead/img/attack.png" id="2_t78em"]
 [ext_resource type="Texture2D" uid="uid://cagwm5qv1y0xb" path="res://enemies/dynamic/undead/img/death.png" id="3_fpqdd"]
 [ext_resource type="Texture2D" uid="uid://dtyyj2okt8exv" path="res://enemies/dynamic/undead/img/idle.png" id="4_oen0v"]
-[ext_resource type="AudioStream" uid="uid://d0lnl8s085xvd" path="res://enemies/dynamic/undead/sounds/enemy_death.wav" id="5_t78em"]
+[ext_resource type="AudioStream" uid="uid://bsypuicfxhflw" path="res://enemies/dynamic/undead/sounds/undead_death.wav" id="5_t78em"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_24kam"]
 atlas = ExtResource("2_t78em")

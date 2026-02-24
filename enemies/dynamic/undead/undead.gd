@@ -91,5 +91,6 @@ func die() -> void:
 	
 	deathAudio.play()
 	enemyAnimations.play(deathAnimation)
+	
 	await enemyAnimations.animation_finished
 	queue_free()
