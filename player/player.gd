@@ -229,6 +229,7 @@ func die():
 	playerAni.play("death")
 	handlePhantomMode(true)
 	$PlayerDeathTimer.start()
+	Global._saveGame(points)
 	await $PlayerDeathTimer.timeout
 	get_tree().change_scene_to_file("res://menus/menu_dead/menu_dead.tscn")
 
