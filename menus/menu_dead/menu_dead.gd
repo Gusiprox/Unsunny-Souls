@@ -1,5 +1,10 @@
 extends Control
 
+@onready var lblPoints = $conMenuDead/lblPoints
+
+func _ready():
+	Global._loadGame()
+	lblPoints.text = "Puntos: " + str(Global.gameData.get(Global.nivelActual, 0))
 
 func _on_btn_reload_pressed():
 	var ruta = Global.nivelActual

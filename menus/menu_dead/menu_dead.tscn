@@ -15,6 +15,15 @@ shadow_size = 30
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(6, 7)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2koq5"]
+bg_color = Color(0, 0, 0, 0.863)
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_v1rg2"]
+font = ExtResource("2_bn14s")
+font_color = Color(0.5529412, 0.14901961, 0.05882353, 1)
+
 [node name="MenuDead" type="Control" unique_id=1656222167]
 layout_mode = 3
 anchors_preset = 15
@@ -35,14 +44,21 @@ offset_left = 335.0
 offset_top = 201.0
 offset_right = 822.0
 offset_bottom = 416.0
+theme_override_constants/separation = 8
 
 [node name="lblDeath" type="Label" parent="conMenuDead" unique_id=970764540]
 layout_mode = 2
 text = "Has muerto"
 label_settings = SubResource("LabelSettings_2koq5")
 
+[node name="lblPoints" type="Label" parent="conMenuDead" unique_id=1232321820]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_2koq5")
+label_settings = SubResource("LabelSettings_v1rg2")
+horizontal_alignment = 1
+
 [node name="btnRetry" type="Button" parent="conMenuDead" unique_id=511375562]
-modulate = Color(3.5229437, 1.6784357, 1.7045296, 0.8627451)
+modulate = Color(3.523, 1.678, 1.705, 0.863)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("2_bn14s")
