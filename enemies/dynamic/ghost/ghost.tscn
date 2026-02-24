@@ -144,6 +144,7 @@ wait_time = 0.1
 
 [node name="GhostDeathAudio" type="AudioStreamPlayer2D" parent="." unique_id=1466662442]
 stream = SubResource("AudioStreamWAV_lglpm")
+volume_db = -10.0
 pitch_scale = 2.1
 
 [connection signal="body_entered" from="GhostArAtk" to="." method="_on_ghost_ar_atk_body_entered"]
