@@ -4,6 +4,7 @@ extends Control
 @onready var conNiveles = $panelNiveles/scrollNiveles/centerNiveles/conNiveles
 @onready var btnRandom = $panelNiveles/btnRandom
 @onready var btnReturn = $panelNiveles/btnReturn
+@onready var menuControls = $MenuControls
 @export var btnFont: FontFile = preload("res://menus/menu_start/font/antiquity-print.ttf")
 
 
@@ -53,3 +54,7 @@ func _on_btn_random_pressed() -> void:
 
 func _on_btn_return_pressed() -> void:
 	panelNiveles.visible = false
+
+
+func _on_btn_controls_pressed() -> void:
+	menuControls.show()

@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cfbf0y6on1q4y" path="res://menus/menu_start/img/menu_start.png" id="2_poocg"]
 [ext_resource type="FontFile" uid="uid://calo67bsedgsr" path="res://menus/menu_start/font/antiquity-print.ttf" id="3_poocg"]
 [ext_resource type="AudioStream" uid="uid://dg2vn5wt77vyo" path="res://common/music/menu.mp3" id="4_is0kx"]
+[ext_resource type="PackedScene" uid="uid://di61xj2w047ie" path="res://menus/menu_controls/menu_controls.tscn" id="5_q5kb6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_is0kx"]
 line_spacing = 1.0
@@ -35,9 +36,9 @@ texture = ExtResource("2_poocg")
 [node name="conMenuStart" type="VBoxContainer" parent="." unique_id=1575708232]
 layout_mode = 0
 offset_left = 402.0
-offset_top = 270.0
+offset_top = 250.0
 offset_right = 741.0
-offset_bottom = 343.0
+offset_bottom = 348.0
 
 [node name="btnStart" type="Button" parent="conMenuStart" unique_id=1563671365]
 layout_mode = 2
@@ -45,6 +46,13 @@ size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("3_poocg")
 theme_override_font_sizes/font_size = 14
 text = "Jugar"
+
+[node name="btnControls" type="Button" parent="conMenuStart" unique_id=1300573983]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_poocg")
+theme_override_font_sizes/font_size = 14
+text = "Controles"
 
 [node name="btnExit" type="Button" parent="conMenuStart" unique_id=83390422]
 layout_mode = 2
@@ -56,9 +64,9 @@ text = "Salir"
 [node name="lblNombJuego" type="Label" parent="." unique_id=1764377273]
 layout_mode = 0
 offset_left = 262.0
-offset_top = 130.0
+offset_top = 100.0
 offset_right = 897.0
-offset_bottom = 234.0
+offset_bottom = 204.0
 text = "Unsunny Souls"
 label_settings = SubResource("LabelSettings_is0kx")
 
@@ -110,7 +118,12 @@ stream = ExtResource("4_is0kx")
 autoplay = true
 parameters/looping = true
 
+[node name="MenuControls" parent="." unique_id=505495967 instance=ExtResource("5_q5kb6")]
+visible = false
+layout_mode = 1
+
 [connection signal="pressed" from="conMenuStart/btnStart" to="." method="_on_btn_start_pressed"]
+[connection signal="pressed" from="conMenuStart/btnControls" to="." method="_on_btn_controls_pressed"]
 [connection signal="pressed" from="conMenuStart/btnExit" to="." method="_on_btn_exit_pressed"]
 [connection signal="pressed" from="panelNiveles/btnRandom" to="." method="_on_btn_random_pressed"]
 [connection signal="pressed" from="panelNiveles/btnReturn" to="." method="_on_btn_return_pressed"]
