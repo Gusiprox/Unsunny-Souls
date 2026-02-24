@@ -19,6 +19,7 @@ var deathAnimation: String = "death"
 @onready var enemyRightSearchCollisions = $GhostArSearchRight/GhostColSearchRight
 @onready var attackArea = $GhostArAtk
 @onready var TimerReactivateSearch = $TimerReactivateSearch
+@onready var deathAudio = $GhostDeathAudio
 
 func _ready() -> void:
 	add_to_group(groupEnemies)
@@ -88,14 +89,19 @@ func die() -> void:
 	enemyCollisions.set_deferred("disabled", true)
 	attackArea.set_deferred("monitoring", false)
 	set_physics_process(false)
+	
+	deathAudio.play()
 	enemyAnimations.play(deathAnimation)
 	await enemyAnimations.animation_finished
 	queue_free()
 
 func resetSearchCollisions() -> void:
 	TimerReactivateSearch.start()
+	
 	enemyRightSearchCollisions.set_deferred("disabled", true)
 	enemyLeftSearchCollisions.set_deferred("disabled", true)
+	
 	await TimerReactivateSearch.timeout
+	
 	enemyRightSearchCollisions.set_deferred("disabled", false)
 	enemyLeftSearchCollisions.set_deferred("disabled", false)

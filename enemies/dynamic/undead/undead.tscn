@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dnfo7eprrh2sh" path="res://enemies/dynamic/undead/img/attack.png" id="2_t78em"]
 [ext_resource type="Texture2D" uid="uid://cagwm5qv1y0xb" path="res://enemies/dynamic/undead/img/death.png" id="3_fpqdd"]
 [ext_resource type="Texture2D" uid="uid://dtyyj2okt8exv" path="res://enemies/dynamic/undead/img/idle.png" id="4_oen0v"]
+[ext_resource type="AudioStream" uid="uid://d0lnl8s085xvd" path="res://enemies/dynamic/undead/sounds/enemy_death.wav" id="5_t78em"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_24kam"]
 atlas = ExtResource("2_t78em")
@@ -305,6 +306,10 @@ target_position = Vector2(0, 45)
 
 [node name="TimerReactivateSearch" type="Timer" parent="." unique_id=2129723040]
 wait_time = 0.1
+
+[node name="UndeadDeathAudio" type="AudioStreamPlayer2D" parent="." unique_id=1684515657]
+stream = ExtResource("5_t78em")
+volume_db = -10.0
 
 [connection signal="body_entered" from="UndeadArAtk" to="." method="_on_undead_ar_body_entered"]
 [connection signal="body_entered" from="UndeadArAtk" to="." method="_on_undead_ar_atk_body_entered"]

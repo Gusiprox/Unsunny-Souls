@@ -21,6 +21,7 @@ var attackAnimation: String = "attack"
 @onready var TimerReactivateSearch = $TimerReactivateSearch
 @onready var leftRay = $RayLeft
 @onready var rightRay = $RayRight
+@onready var deathAudio = $UndeadDeathAudio
 
 func _ready() -> void:
 	add_to_group(groupEnemies)
@@ -87,6 +88,8 @@ func die() -> void:
 	enemyCollisions.set_deferred("disabled", true)
 	attackArea.set_deferred("monitoring", false)
 	set_physics_process(false)
+	
+	deathAudio.play()
 	enemyAnimations.play(deathAnimation)
 	await enemyAnimations.animation_finished
 	queue_free()

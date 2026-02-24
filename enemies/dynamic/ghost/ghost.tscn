@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://u4ja1sx0kcpu" path="res://enemies/dynamic/ghost/img/summonIdle.png" id="1_15g15"]
 [ext_resource type="Texture2D" uid="uid://dlu4gt7c6074m" path="res://enemies/dynamic/ghost/img/summonDeath.png" id="1_h84aa"]
 [ext_resource type="Script" uid="uid://bm6jkq7bmej00" path="res://enemies/dynamic/ghost/ghost.gd" id="1_lglpm"]
+[ext_resource type="AudioStream" uid="uid://berworntsoo75" path="res://enemies/dynamic/ghost/sounds/enemy_death.wav" id="4_4vs6u"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hrn7e"]
 atlas = ExtResource("1_h84aa")
@@ -135,6 +136,10 @@ shape = SubResource("RectangleShape2D_lglpm")
 
 [node name="TimerReactivateSearch" type="Timer" parent="." unique_id=1225831164]
 wait_time = 0.1
+
+[node name="GhostDeathAudio" type="AudioStreamPlayer2D" parent="." unique_id=1466662442]
+stream = ExtResource("4_4vs6u")
+pitch_scale = 4.0
 
 [connection signal="body_entered" from="GhostArAtk" to="." method="_on_ghost_ar_atk_body_entered"]
 [connection signal="body_entered" from="GhostArSearchLeft" to="." method="_on_ghost_ar_search_left_body_entered"]
