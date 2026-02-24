@@ -543,8 +543,10 @@ one_shot = true
 
 [node name="PlayerAtackSound" type="AudioStreamPlayer" parent="." unique_id=591705562]
 stream = ExtResource("12_ebec5")
+volume_db = -10.0
 
 [node name="PlayerDamageSound" type="AudioStreamPlayer" parent="." unique_id=585526410]
 stream = ExtResource("14_kb6p2")
+volume_db = -10.0
 
 [connection signal="body_entered" from="PlayerAtackAr" to="." method="_onEnterDamageArea"]

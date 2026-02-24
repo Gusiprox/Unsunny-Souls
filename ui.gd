@@ -22,16 +22,14 @@ func _ready() -> void:
 func _setLife(count: int):
 	if count > 5 or count < 0:
 		return
-	
+		
 	if count == 5:
 		uiAni.play("4to5")
 		return
-
 	if count > lastHearts:
 		uiAni.play(anims[count-1])
 	else:
 		uiAni.play_backwards(anims[count])
-	
 	lastHearts = count
 
 func _setPoints(count: int):
