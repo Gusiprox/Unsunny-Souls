@@ -96,10 +96,13 @@ parameters/looping = true
 [node name="Spikes" type="Node2D" parent="Enemies" unique_id=719578810]
 
 [node name="Spikes" parent="Enemies/Spikes" unique_id=1672386751 instance=ExtResource("3_tlj8d")]
-position = Vector2(1075, 585)
+position = Vector2(1073, 585)
+
+[node name="Spikes11" parent="Enemies/Spikes" unique_id=742698760 instance=ExtResource("3_tlj8d")]
+position = Vector2(1089, 585)
 
 [node name="Spikes2" parent="Enemies/Spikes" unique_id=1213124934 instance=ExtResource("3_tlj8d")]
-position = Vector2(1100, 585)
+position = Vector2(1105, 585)
 
 [node name="Spikes3" parent="Enemies/Spikes" unique_id=306004194 instance=ExtResource("3_tlj8d")]
 position = Vector2(1557, 580)

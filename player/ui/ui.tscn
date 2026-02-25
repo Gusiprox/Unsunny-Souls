@@ -283,7 +283,7 @@ animations = [{
 [sub_resource type="LabelSettings" id="LabelSettings_jxrsk"]
 font = ExtResource("8_jxrsk")
 font_size = 24
-font_color = Color(1, 1, 0, 1)
+font_color = Color(0.6223946, 0.7165393, 0.4419352, 1)
 
 [node name="UI" type="Control" unique_id=1593773411]
 layout_mode = 3
