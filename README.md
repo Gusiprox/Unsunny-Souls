@@ -8,7 +8,7 @@
 ## Indice
 - [Conceptualización](#conceptualización)
 - [Arte](#arte)
-- [Programas](#programación)
+- [Programación](#programación)
 - [Elementos destacables](#elementos-destacables)
 
 ## Conceptualización
@@ -61,11 +61,34 @@ Aquí puede ver las páginas donde hemos obtenido los distintos recursos son:
 
 ## Programación
 
-Para la realización de este videojuego se han usado una variedad de escenas que se encuentran aquí explicadas:
+Para la realización de este videojuego se han usado una variedad de escenas que se explican a continuación:
 
 ### Jugador
 
 ### Enemigos
+
+#### Estáticos
+
+En nuestro juego contamos con un enemigo dinámico, un pincho, creado con un nodo de Area2D que contiene dos nodos, uno para introducir el sprite y otro para proporcionarle un área de colisión.
+
+En el script creado para este enemigo se encuentran dos funciones:
+
+- Función **_ready()** que añade al pincho al grupo enemies.
+```gdscript
+func _ready() -> void:
+	add_to_group("enemies")
+```
+
+
+- Función **_on_body_entered(body: Node2D)**, que comprueba si es el jugador el que está en contacto con él y que contiene el método. Si se cumple el if, llama al método _dealSpikeDamage() presente en el script del jugador, el cual gestiona el daño que recibe y devuelve al jugador a una posición segura previa a haber colisionado con el pincho.
+
+```gdscript
+func _on_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player") and body.has_method("_dealSpikeDamage"):
+		body._dealSpikeDamage()
+```
+
+#### Dinámicos
 
 Para la creación de los 2 enemigos se han usado una escena por cada enemigo: 
 
@@ -105,15 +128,68 @@ Para los fantasmas se han tenido que operar tanto con valores horizontales como 
 
 ### Spawner
 
-### Heart
+### Corazón
+
+Se ha añadido un objeto, el corazón, creando un nodo Area2D con un AnimatedSprite2D en el que se ha introducido una animación y un nodo para gestionar sus colisiones.
+
+En el script creado para este objeto se encuentran dos funciones:
+
+- Función **_ready()**, en la que se reproduce la animación creada para el objeto.
+
+```gdscript
+func _ready():
+	$HeartAni.play("default")
+```
+
+- Función **_on_body_entered(body: Node2D)**, que comprueba que el objeto que ha entrado en contacto con él es parte del grupo player y, de ser así, llama al método que se encuentra en el script del jugador _addHealth(), que recupera un punto de salud del jugador, en caso de que no tenga toda la vida. Para terminar llama al método queue_free() para eliminarse.
+
+```gdscript
+func _on_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		body._addHealth()
+		queue_free()
+```
 
 ### Terreno y fondo (Yo creo que queda mejor explicarlo junto pero si lo ves mejor separado hazlo)
+
+Para la creación del terreno se ha utilizado un nodo TileMapLayer. Se le ha introducido un tileset, que ha sido configurado para que tenga colisiones.
 
 Para el fondo se ha usado una escena llamada **fondo** que cuenta con un ParallaxBackground que contiene tres ParallaxLayers, cada una de ellas con una imagen que puestas todas juntas nos da el fondo.
 
 ### Niveles (Creo que mejor explicarlos todos juntos, pero cambialo si quieres)
 
 ### Menus (Creo que mejor explicar los 2 juntos, pero cambialo si quieres)
+
+#### Menú de inicio
+
+Se ha creado un nodo Control y dentro de él se han introducido los siguientes nodos:
+
+- **Sprite2D**, para añadir la imágen del fondo.
+- **VBoxContainer**, donde se han metido los tres botones principales del menú (jugar, controles y salir).
+- **Label**, para mostrar el nombre del juego.
+- **Panel**, en el que se introducen los nodos del submenú mostrado al presionar el botón jugar.
+  - **ScrollContainer** que contiene un **CenterContainer** que a su vez contiene un **VBoxContainer**. La razón por la que se ha utilizado ésta estructura es porque, si los niveles disponibles sobrepasan el tamaño otorgado para que se muestren, se superpondrían con los botones inferiores o se saldrían del panel. Sin embargo, utilizando un ScrollContainer, al superar el espacio otorgado, los botones de cada nivel disponibles se pueden observar despazandose hacia abajo con la rueda del ratón. El nodo CenterContainer es para tenerlos centrados.
+  - **Button** (btnRandom), que se utiliza para que el propio juego escoja un nivel en vez de que lo haga el jugador.
+  - **Button** (btnReturn), que se utiliza para cerrar el submenú.
+- **AudioStreamPlayer2D**, utilizado para reproducir la música del menú en bucle.
+- **Control** (MenuControls), 
+
+En el script creado para ésta escena se encuentran los siguientes métodos:
+
+#### Menú de muerte
+
+Se ha creado un nodo **Control (MenuDead)** y dentro de él se han introducido los siguientes nodos:
+
+- **Sprite2D (imgMenuDead)**, para añadir la imágen del fondo.
+-  **VBoxContainer (conMenuDead)**, donde se han introducido los siguientes nodos:
+   -  **Label (lblDeath)**, para mostrar un texto de muerte.
+   -  **Label (lblPoints)**, donde se van a mostrar la cantidad de puntos obtenidos en la partida del jugador.
+   -  **Button (btnRetry)**, para volver a intentar jugar el nivel.
+   -  **Button (btnMainMenu)**, para volver al menú principal.
+   -  **Button (btnExit)**, para salir del juego.
+- **AudioStreamPlayer2D (audioMenuDead)**, utilizado para reproducir la música del menú en bucle.
+
+En el script creado para ésta escena se encuentran los siguientes métodos:
 
 ## Elementos destacables
 
