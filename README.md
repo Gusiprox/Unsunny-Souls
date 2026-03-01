@@ -5,11 +5,25 @@
 - Sara Pérez
 - Erik de la Cruz
 
-## Indice
-- [Conceptualización](#conceptualización)
-- [Arte](#arte)
-- [Programación](#programación)
-- [Elementos destacables](#elementos-destacables)
+## Índice
+- [Unsunny Souls](#unsunny-souls)
+	- [Integrantes del grupo](#integrantes-del-grupo)
+	- [Índice](#índice)
+	- [Conceptualización](#conceptualización)
+	- [Arte](#arte)
+	- [Programación](#programación)
+		- [Jugador](#jugador)
+		- [Enemigos](#enemigos)
+			- [Estáticos](#estáticos)
+			- [Dinámicos](#dinámicos)
+		- [Spawner](#spawner)
+		- [Corazón](#corazón)
+		- [Terreno y fondo](#terreno-y-fondo)
+		- [Menus](#menus)
+			- [Menú de inicio](#menú-de-inicio)
+			- [Menú de controles](#menú-de-controles)
+			- [Menú de muerte](#menú-de-muerte)
+	- [Elementos destacables](#elementos-destacables)
 
 ## Conceptualización
 
@@ -150,15 +164,13 @@ func _on_body_entered(body: Node2D) -> void:
 		queue_free()
 ```
 
-### Terreno y fondo (Yo creo que queda mejor explicarlo junto pero si lo ves mejor separado hazlo)
+### Terreno y fondo
 
 Para la creación del terreno se ha utilizado un nodo TileMapLayer. Se le ha introducido un tileset, que ha sido configurado para que tenga colisiones.
 
 Para el fondo se ha usado una escena llamada **fondo** que cuenta con un ParallaxBackground que contiene tres ParallaxLayers, cada una de ellas con una imagen que puestas todas juntas nos da el fondo.
 
-### Niveles (Creo que mejor explicarlos todos juntos, pero cambialo si quieres)
-
-### Menus (Creo que mejor explicar los 2 juntos, pero cambialo si quieres)
+### Menus
 
 #### Menú de inicio
 
@@ -172,9 +184,60 @@ Se ha creado un nodo Control y dentro de él se han introducido los siguientes n
   - **Button** (btnRandom), que se utiliza para que el propio juego escoja un nivel en vez de que lo haga el jugador.
   - **Button** (btnReturn), que se utiliza para cerrar el submenú.
 - **AudioStreamPlayer2D**, utilizado para reproducir la música del menú en bucle.
-- **Control** (MenuControls), 
+- **Control** (MenuControls), que abre un menú en el que el jugador puede consultar los controles del juego.
 
-En el script creado para ésta escena se encuentran los siguientes métodos:
+En el script creado para ésta escena los métodos importantes son:
+
+- Función **_ready()**, en la que se utiliza un método randomize() para que el número aleatorio obtenido en el botón random sea realmente aleatorio, ya que genera una nueva semilla cada vez que ejecutas el juego. Vuelve el panél de niveles invisible para que no se vea inicialmente y llama a la función crearBotonesNiveles() para que se creen todos los botones de los niveles disponibles.
+
+```gdscript
+func _ready():
+	randomize()
+	panelNiveles.visible = false
+	crearBotonesNiveles()
+```
+
+- Función **crearBotonesNiveles()**, en la que se utiliza un bucle for para crear los botones de cada nivel guardado en la variable **niveles**, asignando el nombre que le corresponde a cada nivel. Cuando se presiona el botón de un nivel, se llama a la función **_onNivelPressed(nivelPath: String)**, se asigna la ruta que le corresponde. Además, la función gestiona el tamaño y la fuente de los botones creados.
+
+```gdscript
+@export var btnFont: FontFile = preload("res://menus/menu_start/font/antiquity-print.ttf")
+
+var niveles = [
+	{"ruta": "res://environment/levels/nivel_1.tscn", "nombre": "Bosque"},
+	{"ruta": "res://environment/levels/nivel_2.tscn", "nombre": "Cueva Boscosa"}
+]
+
+func crearBotonesNiveles():
+	for i in range(niveles.size()):
+		var btn = Button.new()
+		btn.text = niveles[i]["nombre"]
+		
+		if btnFont:
+			btn.add_theme_font_override("font", btnFont)
+			btn.add_theme_font_size_override("font_size", 14)
+			
+		btn.pressed.connect(Callable(self, "_onNivelPressed").bind(niveles[i]["ruta"]))
+		conNiveles.add_child(btn)
+
+func _onNivelPressed(nivelPath: String):
+	Global.nivelActual = nivelPath
+	get_tree().change_scene_to_file(nivelPath)
+```
+
+- Función **_on_btn_random_pressed()**, en la que se genera un número aleatorio en un rango de 0 al tamaño del array de niveles. Este número se utiliza en la posición del array, con la ruta del nivel correspondiente a esa posición obtenida, que además se guarda en una variable que posteriormente se utilizará en el menú de muerte.
+
+```gdscript
+func _on_btn_random_pressed() -> void:
+	var index = randi_range(0, niveles.size() - 1)
+	var nivelAleatorio = niveles[index]["ruta"]
+	Global.nivelActual = nivelAleatorio
+	get_tree().change_scene_to_file(nivelAleatorio)	
+
+```
+
+#### Menú de controles
+
+
 
 #### Menú de muerte
 
@@ -189,7 +252,24 @@ Se ha creado un nodo **Control (MenuDead)** y dentro de él se han introducido l
    -  **Button (btnExit)**, para salir del juego.
 - **AudioStreamPlayer2D (audioMenuDead)**, utilizado para reproducir la música del menú en bucle.
 
-En el script creado para ésta escena se encuentran los siguientes métodos:
+En el script creado para ésta escena las funciones importantes son:
+
+- Función **_ready()**, en la que se cargan los puntos obtenidos por el jugador antes de morir y posteriormente se muestran por pantalla utilizando una etiqueta.
+
+```gdscript
+func _ready():
+	Global._loadGame()
+	lblPoints.text = "Puntos: " + str(Global.gameData.get(Global.nivelActual, 0))
+```
+
+- Función **_on_btn_reload_pressed()**, que devuelve al jugador al mapa en el que estaba antes de morir, utilizando la variable global **nivelActual**, en la que se ha guardado el nivel escogido en el menú de inicio.
+
+```gdscript
+func _on_btn_reload_pressed():
+	var ruta = Global.nivelActual
+	get_tree().change_scene_to_file(ruta)
+```
+
 
 ## Elementos destacables
 
