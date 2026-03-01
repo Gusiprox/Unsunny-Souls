@@ -93,8 +93,7 @@ func _ready() -> void:
 	add_to_group("enemies")
 ```
 
-
-- Función **_on_body_entered(body: Node2D)**, que comprueba si es el jugador el que está en contacto con él y que contiene el método. Si se cumple el if, llama al método _dealSpikeDamage() presente en el script del jugador, el cual gestiona el daño que recibe y devuelve al jugador a una posición segura previa a haber colisionado con el pincho.
+- Función **_on_body_entered(body: Node2D)**, que comprueba si es el jugador el que está en contacto con él y que contiene el método. Si se cumple el if, llama al método **_dealSpikeDamage()** presente en el script del jugador, el cual gestiona el daño que recibe y devuelve al jugador a una posición segura previa a haber colisionado con el pincho.
 
 ```gdscript
 func _on_body_entered(body: Node2D) -> void:
@@ -106,11 +105,11 @@ func _on_body_entered(body: Node2D) -> void:
 
 Para la creación de los 2 enemigos se han usado una escena por cada enemigo: 
 
-- Undead: Enemigo terrestre con una guadaña sin posibilidades de saltar
+- **Undead**: Enemigo terrestre con una guadaña sin posibilidades de saltar
 
-- Ghost: Pequeño fantasma que vuela por el escenario y desaparecer colisionar con el jugador
+- **Ghost**: Pequeño fantasma que vuela por el escenario y desaparecer colisionar con el jugador
 
-Ambos cuentan con métodos como ```add_to_group(groupEnemies)``` para añadirles al grupo de enemigos para que puedan atacar y ser atacados por el jugador, se ha usado un area2D junto a un CollisionShape2D para que ataque al jugador y además se han usado otros para detectar al jugador cuando se acerca lo suficiente y moverse para perseguirlo, para lograr esto se ha usado la variable way (sentido) y dependiendo de si se encontraba a la derecha o izquierda se cambiaba el valor de este.
+Ambos cuentan con métodos como **add_to_group(groupEnemies)** para añadirles al grupo de enemigos para que puedan atacar y ser atacados por el jugador, se ha usado un area2D junto a un **CollisionShape2D** para que ataque al jugador y además se han usado otros para detectar al jugador cuando se acerca lo suficiente y moverse para perseguirlo, para lograr esto se ha usado la variable way (sentido) y dependiendo de si se encontraba a la derecha o izquierda se cambiaba el valor de este.
 
 ```gdscript
 func _on_undead_ar_search_left_body_entered(body: Node2D) -> void:
@@ -138,13 +137,13 @@ func die() -> void:
 	queue_free()
 ```
 
-Para los fantasmas se han tenido que operar tanto con valores horizontales como verticales para la realización del vuelo como ```Horizontalspeed Verticalspeed``` o ```HorizontalWay VerticalWay``` y a su mismo tiempo se han tenido que usar funciones que eviten que abandonen el mapa cuando el jugador saliese de su rango de visión ```_on_ghost_ar_search_up_body_exited```
+Para los fantasmas se han tenido que operar tanto con valores horizontales como verticales para la realización del vuelo como **Horizontalspeed Verticalspeed** o **HorizontalWay VerticalWay** y a su mismo tiempo se han tenido que usar funciones que eviten que abandonen el mapa cuando el jugador saliese de su rango de visión **_on_ghost_ar_search_up_body_exited**.
 
 ### Spawner
 
 ### Corazón
 
-Se ha añadido un objeto, el corazón, creando un nodo Area2D con un AnimatedSprite2D en el que se ha introducido una animación y un nodo para gestionar sus colisiones.
+Se ha añadido un objeto, el corazón, creando un nodo **Area2D** con un **AnimatedSprite2D** en el que se ha introducido una animación y un nodo para gestionar sus colisiones.
 
 En el script creado para este objeto se encuentran dos funciones:
 
@@ -155,7 +154,7 @@ func _ready():
 	$HeartAni.play("default")
 ```
 
-- Función **_on_body_entered(body: Node2D)**, que comprueba que el objeto que ha entrado en contacto con él es parte del grupo player y, de ser así, llama al método que se encuentra en el script del jugador _addHealth(), que recupera un punto de salud del jugador, en caso de que no tenga toda la vida. Para terminar llama al método queue_free() para eliminarse.
+- Función **_on_body_entered(body: Node2D)**, que comprueba que el objeto que ha entrado en contacto con él es parte del grupo player y, de ser así, llama al método que se encuentra en el script del jugador _addHealth(), que recupera un punto de salud del jugador, en caso de que no tenga toda la vida. Para terminar llama al método **queue_free()** para eliminarse.
 
 ```gdscript
 func _on_body_entered(body: Node2D) -> void:
@@ -166,9 +165,9 @@ func _on_body_entered(body: Node2D) -> void:
 
 ### Terreno y fondo
 
-Para la creación del terreno se ha utilizado un nodo TileMapLayer. Se le ha introducido un tileset, que ha sido configurado para que tenga colisiones.
+Para la creación del terreno se ha utilizado un nodo **TileMapLayer**. Se le ha introducido un tileset, que ha sido configurado para que tenga colisiones.
 
-Para el fondo se ha usado una escena llamada **fondo** que cuenta con un ParallaxBackground que contiene tres ParallaxLayers, cada una de ellas con una imagen que puestas todas juntas nos da el fondo.
+Para el fondo se ha usado una escena llamada **fondo** que cuenta con un ParallaxBackground que contiene tres **ParallaxLayers**, cada una de ellas con una imagen que puestas todas juntas nos da el fondo.
 
 ### Menus
 
@@ -180,7 +179,7 @@ Se ha creado un nodo Control y dentro de él se han introducido los siguientes n
 - **VBoxContainer**, donde se han metido los tres botones principales del menú (jugar, controles y salir).
 - **Label**, para mostrar el nombre del juego.
 - **Panel**, en el que se introducen los nodos del submenú mostrado al presionar el botón jugar.
-  - **ScrollContainer** que contiene un **CenterContainer** que a su vez contiene un **VBoxContainer**. La razón por la que se ha utilizado ésta estructura es porque, si los niveles disponibles sobrepasan el tamaño otorgado para que se muestren, se superpondrían con los botones inferiores o se saldrían del panel. Sin embargo, utilizando un ScrollContainer, al superar el espacio otorgado, los botones de cada nivel disponibles se pueden observar despazandose hacia abajo con la rueda del ratón. El nodo CenterContainer es para tenerlos centrados.
+  - **ScrollContainer** que contiene un **CenterContainer** que a su vez contiene un **VBoxContainer**. La razón por la que se ha utilizado ésta estructura es porque, si los niveles disponibles sobrepasan el tamaño otorgado para que se muestren, se superpondrían con los botones inferiores o se saldrían del panel. Sin embargo, utilizando un **ScrollContainer**, al superar el espacio otorgado, los botones de cada nivel disponibles se pueden observar despazandose hacia abajo con la rueda del ratón. El nodo **CenterContainer** es para tenerlos centrados.
   - **Button** (btnRandom), que se utiliza para que el propio juego escoja un nivel en vez de que lo haga el jugador.
   - **Button** (btnReturn), que se utiliza para cerrar el submenú.
 - **AudioStreamPlayer2D**, utilizado para reproducir la música del menú en bucle.
@@ -188,7 +187,7 @@ Se ha creado un nodo Control y dentro de él se han introducido los siguientes n
 
 En el script creado para ésta escena los métodos importantes son:
 
-- Función **_ready()**, en la que se utiliza un método randomize() para que el número aleatorio obtenido en el botón random sea realmente aleatorio, ya que genera una nueva semilla cada vez que ejecutas el juego. Vuelve el panél de niveles invisible para que no se vea inicialmente y llama a la función crearBotonesNiveles() para que se creen todos los botones de los niveles disponibles.
+- Función **_ready()**, en la que se utiliza un método **randomize()** para que el número aleatorio obtenido en el botón random sea realmente aleatorio, ya que genera una nueva semilla cada vez que ejecutas el juego. Vuelve el panél de niveles invisible para que no se vea inicialmente y llama a la función crearBotonesNiveles() para que se creen todos los botones de los niveles disponibles.
 
 ```gdscript
 func _ready():
