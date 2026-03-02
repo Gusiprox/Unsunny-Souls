@@ -27,23 +27,6 @@
 
 ## Conceptualización
 
-Nuestro videojuego trata de un caballero que se encuentra en una arena en la que aparecen monstruos, el objetivo es en derrotar a la mayor cantidad de enemigos posibles, para conseguir la mayor cantidad de puntos, antes de ser derrotado.
-
-El juego es un plataformero 2D donde el jugador cuenta con 5 puntos de vida y podrá atacar, saltar, saltar una vez en el aire y rodar en el suelo para esquivar ataques, también habrá un coleccionable con forma de corazón en el nivel que recuperará un punto de vida y un contador de puntos. 
-
-Tenemos diferentes niveles diseñados de forma distinta y con 2 tipos enemigos que iran apareciendo con el paso del tiempo, uno terrestre y otro volador, ambos serán hostiles y perseguiran al jugador, además el volador desaparecerá tras atacar.
-
-Será de estética medieval fantasiosa al contar con un caballero en armadura que ataca con una espada, un enemigo no-muerto con una guadaña y un fantasma.
-
-Al abrir el juego se verá la pantalla de inicio con las opciones de jugar al nivel que tú selecciones o a uno aleatorio y cerrar el juego, al seleccionar un nivel se cargará un escenario con tu personaje, una imagen de fondo y enemigos, arriba a la derecha se podrá ver la salud del jugador y la cantidad de puntos que tiene. Al quedarse sin puntos de vida saldrá una pantalla de fin de partida con las opciones de volver a intentarlo, salir al menú principal y cerrar el juego.
-
-Los controles son:
-- **A** para moverse a la izquierda
-- **D** para moverse a la derecha
-- **Space** para saltar
-- **J** para atacar, se atacará con la espada por lo que el rango será limitado
-- **Shift (Mayus)** para rodar
-
 ### Historia
 
 La historia sigue a **Lancelot y Siegfried**, dos hermanos que son los caballeros más fuertes de **Gran Bretaña**. Ambos luchan contra monstruos de todo tipo sin perder jamás.
@@ -51,6 +34,25 @@ La historia sigue a **Lancelot y Siegfried**, dos hermanos que son los caballero
 Al inicio del juego, los dos se encontraban en el extranjero; cuando estaban regresando, vieron a lo lejos su** ciudad destruida**. En ese momento, unos dioses bajaron del cielo y les explicaron la situación: unas parcas les habían robado el alma a todos los habitantes. Para poder resucitar a su gente, los protagonistas necesitan **recuperar todas las almas**.
 
 El juego continúa a través de diferentes niveles, como el bosque en el camino de regreso a Gran Bretaña, la ciudadela y, finalmente, el infierno, hacia donde las parcas han huido.
+
+Nuestro videojuego trata de un caballero que se encuentra en una arena en la que aparecen monstruos, el objetivo es en derrotar a la mayor cantidad de enemigos posibles, para conseguir la mayor cantidad de puntos, antes de ser derrotado.
+
+### Juego
+
+El juego es un plataformero 2D donde el jugador cuenta con 5 puntos de vida y podrá atacar, saltar, saltar una vez en el aire y rodar en el suelo para esquivar ataques, también habrá un coleccionable con forma de corazón en el nivel que recuperará un punto de vida y un contador de puntos. 
+
+Tenemos diferentes niveles diseñados de forma distinta y con 2 tipos enemigos que iran apareciendo con el paso del tiempo, uno terrestre y otro volador, ambos serán hostiles y perseguiran al jugador, además el volador desaparecerá tras atacar.
+
+Será de estética medieval fantasiosa al contar con un caballero en armadura que ataca con una espada, un enemigo no-muerto con una guadaña y un fantasma.
+
+Al abrir el juego se verá la pantalla de inicio con las opciones de jugar al nivel que tú selecciones o a uno aleatorio, abrir el menú de los controles y cerrar el juego, al seleccionar un nivel se cargará un escenario con tu personaje, una imagen de fondo y enemigos, arriba a la derecha se podrá ver la salud del jugador y la cantidad de puntos que tiene. Al quedarse sin puntos de vida saldrá una pantalla de fin de partida con las opciones de volver a intentarlo, salir al menú principal y cerrar el juego.
+
+Los controles son:
+- **A** para moverse a la izquierda
+- **D** para moverse a la derecha
+- **J** para atacar, se atacará con la espada por lo que el rango será limitado
+- **Space** para saltar
+- **Shift (Mayus)** para rodar
 
 ## Arte
 
@@ -63,15 +65,11 @@ Aquí puede ver las páginas donde hemos obtenido los distintos recursos son:
 - [Corazón](https://miguelnero.itch.io/hearth)
 - [Escenarios](https://sismodyn.itch.io/ancientforest)
 - [Pinchos](https://omniclause.itch.io/spikes)
-- [Marco de sangre]()
 - Fondos
 - - [Fondo del nivel](https://brullov.itch.io/oak-woods)
-- - [Fondo del menú de inicio]()
-- - [Fondo del menú de muerte]()
+- - [Fondo del menú de inicio](https://pixeljoint.com/pixelart/155719.htm)
 - Sonidos
 - - [Sonido de ataque](https://freesound.org/people/Streety/sounds/30247/)
-- - [Sonido de jugador siendo atacado]()
-- - [Sonido de jugador muriendo]()
 - - [Sonido de muerte del enemigo](https://pixabay.com/sound-effects/horror-creepy-whisper-472369/)
 - Música
 - - [Música menu principal](https://pixabay.com/es/music/cl%C3%A1sico-moderno-medieval-escape-420206/)
@@ -139,7 +137,7 @@ Para la creación de los 2 enemigos se han usado una escena por cada enemigo:
 
 - **Ghost**: Pequeño fantasma que vuela por el escenario y desaparecer colisionar con el jugador
 
-Ambos cuentan con métodos como **add_to_group(groupEnemies)** para añadirles al grupo de enemigos para que puedan atacar y ser atacados por el jugador, se ha usado un area2D junto a un **CollisionShape2D** para que ataque al jugador y además se han usado otros para detectar al jugador cuando se acerca lo suficiente y moverse para perseguirlo, para lograr esto se ha usado la variable way (sentido) y dependiendo de si se encontraba a la derecha o izquierda se cambiaba el valor de este.
+Ambos cuentan con métodos como **add_to_group(groupEnemies)** para añadirles al grupo de enemigos y que puedan atacar y ser atacados por el jugador, se ha usado un area2D junto a un **CollisionShape2D** para que ataque al jugador y además se han usado otros para detectar al jugador cuando se acerca lo suficiente y moverse para perseguirlo, para lograr esto se ha usado la variable way (sentido) y dependiendo de si se encontraba a la derecha o izquierda se cambiaba el valor de este.
 
 ```gdscript
 func _on_undead_ar_search_left_body_entered(body: Node2D) -> void:
@@ -278,7 +276,13 @@ func _on_btn_random_pressed() -> void:
 
 #### Menú de controles
 
+Escena que luego es encontrada en el menú de inicio como un nodo, al principio no es visible pero al pulsarse el botón de **Controles** en el menú principal se hará visible, para ocultarlo se deberá pulsar el botón de cerrar **btnReturn** y lo volverá a ocultar, para su realización cuenta con los siguientes nodos:
 
+- **Sprite2D (imgFrame)**, será el marco que se mostrará al pulsar el botón de los controles.
+-  **VBoxContainer**, que contiene los siguientes textos ordenados:
+   -  **Label (lblControlesName)**, para mostrar el nombre del menú que se acaba de abrir.
+   -  **Label (lblControles)**, lista que muestra todos los controles.
+-  **Button (btnReturn)**, para cerrar el menú y volverlo a ocultar.
 
 #### Menú de muerte
 
