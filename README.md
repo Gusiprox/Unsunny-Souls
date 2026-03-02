@@ -1,5 +1,7 @@
 # Unsunny Souls
 
+> Link al repositorio en GitHub: https://github.com/Gusiprox/Unsunny-Souls.git
+
 ## Integrantes del grupo
 - Aitor Rebato
 - Sara Pérez
@@ -10,6 +12,8 @@
 	- [Integrantes del grupo](#integrantes-del-grupo)
 	- [Índice](#índice)
 	- [Conceptualización](#conceptualización)
+		- [Historia](#historia)
+		- [Juego](#juego)
 	- [Arte](#arte)
 	- [Programación](#programación)
 		- [Jugador](#jugador)
