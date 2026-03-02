@@ -44,6 +44,14 @@ Los controles son:
 - **J** para atacar, se atacará con la espada por lo que el rango será limitado
 - **Shift (Mayus)** para rodar
 
+### Historia
+
+La historia sigue a **Lancelot y Siegfried**, dos hermanos que son los caballeros más fuertes de **Gran Bretaña**. Ambos luchan contra monstruos de todo tipo sin perder jamás.
+
+Al inicio del juego, los dos se encontraban en el extranjero; cuando estaban regresando, vieron a lo lejos su** ciudad destruida**. En ese momento, unos dioses bajaron del cielo y les explicaron la situación: unas parcas les habían robado el alma a todos los habitantes. Para poder resucitar a su gente, los protagonistas necesitan **recuperar todas las almas**.
+
+El juego continúa a través de diferentes niveles, como el bosque en el camino de regreso a Gran Bretaña, la ciudadela y, finalmente, el infierno, hacia donde las parcas han huido.
+
 ## Arte
 
 Los sprites de los jugadores, enemigos, escenarios, fondos, música, sonidos, fuentes y etc se han obtenido de diferentes páginas donde los autores publican sus diseños sin derechos de autor. Sin embargo, la barra de salud del jugador ha sido diseñada por nosotros.
@@ -78,6 +86,28 @@ Aquí puede ver las páginas donde hemos obtenido los distintos recursos son:
 Para la realización de este videojuego se han usado una variedad de escenas que se explican a continuación:
 
 ### Jugador
+
+El jugador necesita tener muchas mecánicas, las cuales se sientan como una sola, por ello se uso un patron de diseño llamado `Maquina de estados`
+
+**Maquina de estados**: es un enum  `states` el cual tiene recogido todos los estados necesarios en el que el jugador puede estar:
+- IDLE
+- RUN
+- FALLING
+- ATACKING
+- DAMAGE
+- DASH,
+- ATACKING_SECOND
+
+Y despues en el controlador de fisicas `_physics_process` hay un switch (match) por cada estado posible, y dentro la logica que tiene que hacer, y unos condicionales para cambiar de estado
+
+Hay funciones de apoyo para situaciones comunes, por ejemplo para desacelerar `decelerate()` para casos en los que se necesite perder velocidad.
+
+`returnExtraJump()`: Recuperar el salto doble
+`die()`: Toda la lógica para que el jugador muera
+`enableAtackCol(col: atackCol)`: Para activar o desactivar la hitbox de colisión de daño, dentro esta un enum para saber que tipo de ataque se hizo, actualmente solo hay izquierda y derecha, pero con el enum se podría añadir una condición para un ataque hacia abajo y arriba
+`disableAtackCol()`: Cuando se termine de hacer el ataque se llama a esta, asi solamente hay que decirle que desactive cuando sea necesario
+`handlePhantomMode(active: bool)`: activar el chocar contra enemigos, los enemigos viven en la capa 2
+
 
 ### Enemigos
 
@@ -140,6 +170,18 @@ func die() -> void:
 Para los fantasmas se han tenido que operar tanto con valores horizontales como verticales para la realización del vuelo como **Horizontalspeed Verticalspeed** o **HorizontalWay VerticalWay** y a su mismo tiempo se han tenido que usar funciones que eviten que abandonen el mapa cuando el jugador saliese de su rango de visión **_on_ghost_ar_search_up_body_exited**.
 
 ### Spawner
+
+Escena util para generar otras escenas en los niveles, principalmente pensada para enemigos pero se pueden poner para cualquier escena y asi iniciar corazones por ejemplo
+
+Para su configuración vemos los siguientes:
+
+`minSpawnWait ` : El tiempo minimo que esperará para generar la escena
+`maxSpawnWait` : El tiempo máximo que esperará para generar la escena,*si se pone igual que el minimo*, **se consigue una generación cada tiempo constante**
+`sceneScale` : Cambiar la escala de la escena creada
+`limitInScene` : El limite de entidades creadas a la vez por ese generador, util para que no sobrecargar de entidades
+`spawnSceneRel`: la escena que se genrará
+
+Para su uso es sencillo, ponlo en la escena y veras una hitbox naranja, ahi es donde aparecerá lo que pongas en el spawnSceneRel, si un jugador esta encima del cuadrado, no se generará nada
 
 ### Corazón
 

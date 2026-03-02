@@ -21,6 +21,16 @@ extends CharacterBody2D
 @onready var playerSoundDamage = $PlayerDamageSound
 @onready var damageSprite = $CanvasLayer/DamageSprite
 @onready var damagePityTimer = $PlayerDamagePityTimer
+@onready var deathTimer = $PlayerDeathTimer
+
+const ATACK_FRAME_END: int = 3
+const ATACK_FRAME_WINDOW_CHAIN: int = 2
+const ATACK_SECOND_FRAME_END: int = 5
+const ATACK_SECOND_FRAME_WINDOW_CHAIN: int = 3
+const DASH_FRAME_END: int = 11
+const DASH_FRAME_INVULNERAVILITY_END: int = 11
+const ANI_VELOCITY_DEFAULT: float = 3
+const DEATH_SCENE: String = "res://menus/menu_dead/menu_dead.tscn"
 
 enum states{
 	IDLE,
@@ -112,11 +122,11 @@ func _physics_process(delta: float) -> void:
 			else:
 				enableAtackCol(atackCol.LEFT)
 				
-			if playerAni.frame == 3:
+			if playerAni.frame == ATACK_FRAME_END:
 				actualState = states.IDLE
 				disableAtackCol()
 
-			if (playerAni.frame >= 2) and Input.is_action_just_pressed("atack"):
+			if (playerAni.frame >= ATACK_FRAME_WINDOW_CHAIN) and Input.is_action_just_pressed("atack"):
 				actualState = states.ATACKING_SECOND
 				disableAtackCol()
 
@@ -129,12 +139,12 @@ func _physics_process(delta: float) -> void:
 				enableAtackCol(atackCol.RIGHT)
 			else:
 				enableAtackCol(atackCol.LEFT)
-			if playerAni.frame == 5:
+			if playerAni.frame == ATACK_SECOND_FRAME_END:
 				playAtackSound(false)
 				actualState = states.IDLE
 				disableAtackCol()
 				
-			if (playerAni.frame >= 3) and Input.is_action_just_pressed("atack"):
+			if (playerAni.frame >= ATACK_SECOND_FRAME_WINDOW_CHAIN) and Input.is_action_just_pressed("atack"):
 				actualState = states.ATACKING
 				playingAtackSound = false
 				disableAtackCol()
@@ -158,13 +168,13 @@ func _physics_process(delta: float) -> void:
 			else:
 				velocity.x = dashForce
 			
-			if playerAni.frame >= 9:
+			if playerAni.frame >= DASH_FRAME_INVULNERAVILITY_END:
 				invulnerability = false
 				handlePhantomMode(false)
 			else:
 				invulnerability = true
 				handlePhantomMode(true)
-			if playerAni.frame == 11:
+			if playerAni.frame == DASH_FRAME_END:
 				actualState = states.IDLE
 				decelerate()
 	
@@ -173,7 +183,6 @@ func _physics_process(delta: float) -> void:
 	applyFriction(inputAxis, delta)
 	applyGravity(delta)
 	move_and_slide()
-	#print(actualState)
 
 func _dealDamage():
 	if invulnerability or isDeath: 
@@ -228,10 +237,10 @@ func die():
 	isDeath = true
 	playerAni.play("death")
 	handlePhantomMode(true)
-	$PlayerDeathTimer.start()
+	deathTimer.start()
 	Global._saveGame(points)
-	await $PlayerDeathTimer.timeout
-	get_tree().change_scene_to_file("res://menus/menu_dead/menu_dead.tscn")
+	await deathTimer.timeout
+	get_tree().change_scene_to_file(DEATH_SCENE)
 
 func delHeart():
 	hearts-=1
@@ -271,7 +280,7 @@ func handleSpeedAnimationVelocity():
 		states.DASH:
 			velocityAni = dashAnimationVelocity
 		_:
-			velocityAni = 3
+			velocityAni = ANI_VELOCITY_DEFAULT
 	playerAni.speed_scale = velocityAni
 
 func handleJump():
