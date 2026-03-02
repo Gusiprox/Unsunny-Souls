@@ -31,7 +31,7 @@
 
 La historia sigue a **Lancelot y Siegfried**, dos hermanos que son los caballeros más fuertes de **Gran Bretaña**. Ambos luchan contra monstruos de todo tipo sin perder jamás.
 
-Al inicio del juego, los dos se encontraban en el extranjero; cuando estaban regresando, vieron a lo lejos su** ciudad destruida**. En ese momento, unos dioses bajaron del cielo y les explicaron la situación: unas parcas les habían robado el alma a todos los habitantes. Para poder resucitar a su gente, los protagonistas necesitan **recuperar todas las almas**.
+Al inicio del juego, los dos se encontraban en el extranjero; cuando estaban regresando, vieron a lo lejos su **ciudad destruida**. En ese momento, unos dioses bajaron del cielo y les explicaron la situación: unas parcas les habían robado el alma a todos los habitantes. Para poder resucitar a su gente, los protagonistas necesitan **recuperar todas las almas**.
 
 El juego continúa a través de diferentes niveles, como el bosque en el camino de regreso a Gran Bretaña, la ciudadela y, finalmente, el infierno, hacia donde las parcas han huido.
 
